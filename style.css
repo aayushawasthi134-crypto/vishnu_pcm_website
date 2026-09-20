@@ -1,0 +1,1262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    color: #172033;
+    background: #ffffff;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+header {
+
+    height: 78px;
+
+    padding: 0 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #071a38;
+
+    color: white;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+}
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.logo > span {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #d7a83e;
+
+    color: #071a38;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+
+.logo strong {
+
+    display: block;
+
+}
+
+
+.logo small {
+
+    color: #b9c6d8;
+
+}
+
+
+nav {
+
+    display: flex;
+
+    gap: 24px;
+
+}
+
+
+nav a {
+
+    color: white;
+
+    font-size: 14px;
+
+}
+
+
+nav a:hover {
+
+    color: #d7a83e;
+
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero {
+
+    min-height: 650px;
+
+    padding: 80px 8%;
+
+    display: grid;
+
+    grid-template-columns: 1.2fr .8fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071a38,
+            #123b70
+        );
+
+    color: white;
+
+}
+
+
+.eyebrow {
+
+    color: #d7a83e;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero h1 {
+
+    font-size: clamp(
+        42px,
+        6vw,
+        75px
+    );
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero-text {
+
+    max-width: 600px;
+
+    color: #d3dceb;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+}
+
+
+.btn {
+
+    padding: 14px 24px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+}
+
+
+.btn.primary {
+
+    background: #d7a83e;
+
+    color: #071a38;
+
+}
+
+
+.btn.secondary {
+
+    border: 1px solid white;
+
+    color: white;
+
+}
+
+
+.hero-card {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.hero-card-inner {
+
+    width: 330px;
+
+    height: 330px;
+
+    border-radius: 50%;
+
+    border: 1px solid
+        rgba(255,255,255,.3);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        rgba(255,255,255,.07);
+
+}
+
+
+.hero-card-inner span {
+
+    color: #d7a83e;
+
+    font-size: 24px;
+
+}
+
+
+.hero-card-inner strong {
+
+    font-size: 40px;
+
+    margin: 10px 0;
+
+}
+
+
+.hero-card-inner small {
+
+    color: #cbd5e4;
+
+}
+
+
+/* =====================================
+   SECTIONS
+===================================== */
+
+.section {
+
+    padding: 90px 8%;
+
+}
+
+
+.section.light {
+
+    background: #f5f7fb;
+
+}
+
+
+.section-title {
+
+    margin-bottom: 45px;
+
+}
+
+
+.section-title > p:first-child {
+
+    color: #c1922d;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 42px;
+
+    margin-top: 8px;
+
+}
+
+
+.section-description {
+
+    color: #687386;
+
+    margin-top: 10px;
+
+    font-size: 16px;
+
+}
+
+
+/* =====================================
+   COURSES
+===================================== */
+
+.course-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.course-card {
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    background: white;
+
+    border: 1px solid #e7eaf0;
+
+    transition: .3s;
+
+}
+
+
+.course-card:hover {
+
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.08);
+
+}
+
+
+.course-card span {
+
+    color: #c1922d;
+
+    font-weight: bold;
+
+    font-size: 25px;
+
+}
+
+
+.course-card h3 {
+
+    margin: 20px 0 12px;
+
+}
+
+
+.course-card p {
+
+    color: #687386;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================
+   FACULTY
+===================================== */
+
+.faculty-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+
+.faculty-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #e5e8ee;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.06);
+
+    transition: .3s;
+
+}
+
+
+.faculty-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0,0,0,.10);
+
+}
+
+
+.faculty-photo {
+
+    height: 300px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071a38,
+            #173d70
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.faculty-photo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.faculty-placeholder {
+
+    font-size: 80px;
+
+}
+
+
+.faculty-info {
+
+    padding: 25px;
+
+}
+
+
+.faculty-subject {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #f4e8c9;
+
+    color: #9b7121;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+
+}
+
+
+.faculty-info h3 {
+
+    margin: 14px 0 10px;
+
+    font-size: 23px;
+
+}
+
+
+.faculty-info p {
+
+    color: #687386;
+
+    line-height: 1.7;
+
+}
+
+
+.faculty-empty {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    color: #687386;
+
+}
+
+
+/* =====================================
+   TOPPERS / ALUMNI
+===================================== */
+
+.people-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+
+.person-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.07);
+
+}
+
+
+.person-card img {
+
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: cover;
+
+}
+
+
+.person-info {
+
+    padding: 25px;
+
+}
+
+
+.person-info .tag {
+
+    color: #c1922d;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+}
+
+
+.person-info h3 {
+
+    margin: 8px 0;
+
+}
+
+
+.person-info p {
+
+    color: #687386;
+
+    line-height: 1.6;
+
+    margin-top: 8px;
+
+}
+
+
+/* =====================================
+   REVIEWS
+===================================== */
+
+.review-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.review-card {
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(0,0,0,.06);
+
+}
+
+
+.stars {
+
+    color: #d7a83e;
+
+    margin-bottom: 15px;
+
+    font-size: 20px;
+
+}
+
+
+.review-card p {
+
+    color: #5d6878;
+
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================
+   GET IN TOUCH
+===================================== */
+
+.contact-section {
+
+    padding: 100px 8%;
+
+    background: #071a38;
+
+    color: white;
+
+}
+
+
+.contact-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+
+/* LEFT */
+
+.contact-heading h2 {
+
+    font-size: 48px;
+
+    line-height: 1.15;
+
+    margin-bottom: 18px;
+
+}
+
+
+.contact-heading h2 span {
+
+    color: #d7a83e;
+
+}
+
+
+.contact-heading > p:last-child {
+
+    color: #cbd5e4;
+
+    line-height: 1.7;
+
+    max-width: 500px;
+
+}
+
+
+.contact-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 30px;
+
+}
+
+
+.contact-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border: 1px solid
+        rgba(255,255,255,.2);
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+    background:
+        rgba(255,255,255,.05);
+
+}
+
+
+.contact-item small {
+
+    display: block;
+
+    color: #d7a83e;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.contact-item a {
+
+    font-size: 17px;
+
+    color: white;
+
+}
+
+
+/* RIGHT FORM */
+
+.query-box {
+
+    background: white;
+
+    color: #172033;
+
+    padding: 38px;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.15);
+
+}
+
+
+.query-box h3 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.query-box > p {
+
+    color: #687386;
+
+    margin-bottom: 25px;
+
+}
+
+
+.query-box label {
+
+    display: block;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.query-box input,
+.query-box textarea {
+
+    width: 100%;
+
+    border: 1px solid #dfe3e9;
+
+    padding: 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 3px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+.query-box input:focus,
+.query-box textarea:focus {
+
+    border-color: #c1922d;
+
+}
+
+
+.query-box textarea {
+
+    min-height: 130px;
+
+    resize: vertical;
+
+}
+
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+.send-query {
+
+    border: none;
+
+    padding: 15px 25px;
+
+    background: #c1922d;
+
+    color: #071a38;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.send-query:hover {
+
+    background: #d7a83e;
+
+    transform: translateY(-2px);
+
+}
+
+
+.form-note {
+
+    display: block;
+
+    color: #7b8491;
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+
+    background: #041127;
+
+    color: white;
+
+}
+
+
+.footer-grid {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 65px 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1.2fr;
+
+    gap: 80px;
+
+}
+
+
+.footer-logo {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #d7a83e;
+
+    color: #071a38;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    font-size: 22px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.footer-brand h3 {
+
+    color: #d7a83e;
+
+    font-size: 21px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.footer-brand p {
+
+    color: #8e9db3;
+
+    line-height: 1.7;
+
+    max-width: 400px;
+
+}
+
+
+.footer-links,
+.footer-contact {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+}
+
+
+.footer-links h4,
+.footer-contact h4 {
+
+    color: #d7a83e;
+
+    letter-spacing: 2px;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.footer-links a,
+.footer-contact a {
+
+    color: #9eabc0;
+
+    transition: .2s;
+
+}
+
+
+.footer-links a:hover,
+.footer-contact a:hover {
+
+    color: white;
+
+}
+
+
+.footer-bottom {
+
+    border-top: 1px solid
+        rgba(255,255,255,.08);
+
+    text-align: center;
+
+    padding: 20px;
+
+    color: #68778e;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width: 1000px) {
+
+    nav {
+
+        gap: 12px;
+
+    }
+
+
+    .hero {
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+    }
+
+
+    .hero-text {
+
+        margin: auto;
+
+    }
+
+
+    .hero-buttons {
+
+        justify-content: center;
+
+    }
+
+
+    .course-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .faculty-grid,
+    .people-grid,
+    .review-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .contact-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width: 700px) {
+
+    header {
+
+        padding: 0 5%;
+
+    }
+
+
+    nav {
+
+        display: none;
+
+    }
+
+
+    .section {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .hero {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .course-grid,
+    .faculty-grid,
+    .people-grid,
+    .review-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+
+    .contact-section {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .contact-heading h2 {
+
+        font-size: 38px;
+
+    }
+
+
+    .query-box {
+
+        padding: 25px;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+    }
+
+}
