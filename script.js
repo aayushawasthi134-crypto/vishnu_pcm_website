@@ -40,13 +40,105 @@ async function loadWebsiteData() {
             data.testimonials
         );
 
+
+        initScrollReveal();
+
     }
+
 
     catch (error) {
 
         console.error(error);
 
     }
+
+
+}
+
+
+/* =====================================
+   AOS-STYLE SCROLL REVEAL
+===================================== */
+
+function initScrollReveal() {
+
+    document.body.classList.add(
+        "aos-ready"
+    );
+
+    const revealElements =
+        document.querySelectorAll(
+            ".scroll-reveal, .fade-in, .slide-in, " +
+            ".course-card, .faculty-card, .person-card, " +
+            ".review-card"
+        );
+
+
+    revealElements.forEach(
+        element => {
+
+            if (!element.classList.contains("slide-in")) {
+                element.classList.add("fade-in");
+            }
+
+        }
+    );
+
+
+    if (!revealElements.length) {
+        return;
+    }
+
+
+    if (
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+
+        revealElements.forEach(
+            element => element.classList.add("aos-animate")
+        );
+
+        return;
+
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+
+                        entry.target.classList.add(
+                            "aos-animate"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+                );
+
+            },
+            {
+                threshold: .12,
+                rootMargin: "0px 0px -45px"
+            }
+        );
+
+
+    revealElements.forEach(
+        element => observer.observe(element)
+    );
 
 }
 
@@ -562,6 +654,9 @@ function escapeHTML(
         );
 
 }
+
+
+initScrollReveal();
 
 
 loadWebsiteData();
