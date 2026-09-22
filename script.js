@@ -2,19 +2,12 @@ async function loadWebsiteData() {
 
     try {
 
+       const API_URL = "https://vishnu-pcm-admin.onrender.com";
+
         const response =
-            await fetch(
-                "/api/public"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load data"
-            );
-
-        }
+        await fetch(
+        `${API_URL}/api/public`
+         );
 
 
         const data =
@@ -40,6 +33,9 @@ async function loadWebsiteData() {
             data.testimonials
         );
 
+
+        initScrollReveal();
+
     }
 
     catch (error) {
@@ -47,6 +43,101 @@ async function loadWebsiteData() {
         console.error(error);
 
     }
+
+}
+
+
+/* =====================================
+   SCROLL REVEAL
+===================================== */
+
+function initScrollReveal() {
+
+    const revealTargets =
+        document.querySelectorAll(
+            ".section-title, .course-card, " +
+            ".faculty-card, .person-card, " +
+            ".review-card, .contact-container, " +
+            ".footer-grid"
+        );
+
+
+    if (!revealTargets.length) {
+        return;
+    }
+
+
+    revealTargets.forEach(
+        (element, index) => {
+
+            element.classList.add(
+                "reveal-on-scroll"
+            );
+
+            element.classList.add(
+                element.classList.contains("section-title") ||
+                element.classList.contains("contact-container") ||
+                element.classList.contains("footer-grid")
+                    ? "fade-in"
+                    : "slide-in"
+            );
+
+            element.style.transitionDelay =
+                `${(index % 4) * 80}ms`;
+
+        }
+    );
+
+
+    if (
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+
+        revealTargets.forEach(
+            element => element.classList.add("is-visible")
+        );
+
+        return;
+
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+
+                        entry.target.classList.add(
+                            "is-visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+                );
+
+            },
+            {
+                threshold: .14,
+                rootMargin: "0px 0px -35px"
+            }
+        );
+
+
+    revealTargets.forEach(
+        element => observer.observe(element)
+    );
 
 }
 
