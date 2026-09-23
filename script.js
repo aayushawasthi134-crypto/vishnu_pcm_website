@@ -1,36 +1,42 @@
+const API_URL = "https://vishnu-pcm-admin.onrender.com";
+
+
+/* =====================================
+   LOAD WEBSITE DATA
+===================================== */
+
 async function loadWebsiteData() {
 
     try {
 
-       const API_URL = "https://vishnu-pcm-admin.onrender.com";
+        const response = await fetch(
+            `${API_URL}/api/public`
+        );
 
-        const response =
-        await fetch(
-        `${API_URL}/api/public`
-         );
+        if (!response.ok) {
+            throw new Error("Failed to load website data");
+        }
 
-
-        const data =
-            await response.json();
+        const data = await response.json();
 
 
         renderFaculty(
-            data.faculty
+            data.faculty || []
         );
 
 
         renderToppers(
-            data.toppers
+            data.toppers || []
         );
 
 
         renderAlumni(
-            data.alumni
+            data.alumni || []
         );
 
 
         renderReviews(
-            data.testimonials
+            data.testimonials || []
         );
 
 
@@ -40,9 +46,48 @@ async function loadWebsiteData() {
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "Website data loading error:",
+            error
+        );
 
     }
+
+}
+
+
+/* =====================================
+   IMAGE URL
+===================================== */
+
+function getImageUrl(photo) {
+
+    if (!photo) {
+        return "";
+    }
+
+
+    /*
+       If Cloudinary or any full URL is already stored,
+       use it directly.
+    */
+
+    if (
+        photo.startsWith("http://") ||
+        photo.startsWith("https://")
+    ) {
+
+        return photo;
+
+    }
+
+
+    /*
+       For old local image paths such as:
+       /static/uploads/image.jpg
+    */
+
+    return `${API_URL}${photo}`;
 
 }
 
@@ -74,13 +119,27 @@ function initScrollReveal() {
                 "reveal-on-scroll"
             );
 
+
             element.classList.add(
-                element.classList.contains("section-title") ||
-                element.classList.contains("contact-container") ||
-                element.classList.contains("footer-grid")
+
+                element.classList.contains(
+                    "section-title"
+                ) ||
+
+                element.classList.contains(
+                    "contact-container"
+                ) ||
+
+                element.classList.contains(
+                    "footer-grid"
+                )
+
                     ? "fade-in"
+
                     : "slide-in"
+
             );
+
 
             element.style.transitionDelay =
                 `${(index % 4) * 80}ms`;
@@ -96,7 +155,10 @@ function initScrollReveal() {
     ) {
 
         revealTargets.forEach(
-            element => element.classList.add("is-visible")
+            element =>
+                element.classList.add(
+                    "is-visible"
+                )
         );
 
         return;
@@ -106,12 +168,15 @@ function initScrollReveal() {
 
     const observer =
         new IntersectionObserver(
+
             entries => {
 
                 entries.forEach(
                     entry => {
 
-                        if (!entry.isIntersecting) {
+                        if (
+                            !entry.isIntersecting
+                        ) {
                             return;
                         }
 
@@ -119,6 +184,7 @@ function initScrollReveal() {
                         entry.target.classList.add(
                             "is-visible"
                         );
+
 
                         observer.unobserve(
                             entry.target
@@ -128,15 +194,19 @@ function initScrollReveal() {
                 );
 
             },
+
             {
-                threshold: .14,
-                rootMargin: "0px 0px -35px"
+                threshold: 0.14,
+                rootMargin:
+                    "0px 0px -35px"
             }
+
         );
 
 
     revealTargets.forEach(
-        element => observer.observe(element)
+        element =>
+            observer.observe(element)
     );
 
 }
@@ -154,6 +224,11 @@ function renderFaculty(
         document.getElementById(
             "facultyGrid"
         );
+
+
+    if (!container) {
+        return;
+    }
 
 
     if (!faculty.length) {
@@ -181,7 +256,9 @@ function renderFaculty(
 
 
     container.innerHTML =
+
         faculty.map(
+
             teacher => `
 
             <article
@@ -196,18 +273,26 @@ function renderFaculty(
                         ?
 
                         `
+
                         <img
-                            src="${teacher.photo}"
-                            alt=""
+                            src="${getImageUrl(
+                                teacher.photo
+                            )}"
+                            alt="${escapeHTML(
+                                teacher.name
+                            )}"
                         >
+
                         `
 
                         :
 
                         `
+
                         <div class="faculty-placeholder">
                             👨‍🏫
                         </div>
+
                         `
                     }
 
@@ -217,24 +302,31 @@ function renderFaculty(
                 <div class="faculty-info">
 
                     <span class="faculty-subject">
+
                         ${escapeHTML(
-                            teacher.subject
+                            teacher.subject || ""
                         )}
+
                     </span>
 
 
                     <h3>
+
                         ${escapeHTML(
-                            teacher.name
+                            teacher.name || ""
                         )}
+
                     </h3>
 
 
                     <p>
+
                         ${escapeHTML(
                             teacher.description ||
+
                             "Dedicated to helping students understand concepts and improve their academic performance."
                         )}
+
                     </p>
 
                 </div>
@@ -242,6 +334,7 @@ function renderFaculty(
             </article>
 
         `
+
         ).join("");
 
 }
@@ -261,6 +354,11 @@ function renderToppers(
         );
 
 
+    if (!container) {
+        return;
+    }
+
+
     if (!toppers.length) {
 
         container.innerHTML = `
@@ -273,9 +371,11 @@ function renderToppers(
                         ACHIEVERS
                     </div>
 
+
                     <h3>
                         Toppers Coming Soon
                     </h3>
+
 
                     <p>
                         New achievers will
@@ -294,21 +394,35 @@ function renderToppers(
 
 
     container.innerHTML =
+
         toppers.map(
+
             topper => `
 
-            <article class="person-card">
+            <article
+                class="person-card"
+            >
 
                 ${
                     topper.photo
+
                     ?
+
                     `
+
                     <img
-                        src="${topper.photo}"
-                        alt=""
+                        src="${getImageUrl(
+                            topper.photo
+                        )}"
+                        alt="${escapeHTML(
+                            topper.name
+                        )}"
                     >
+
                     `
+
                     :
+
                     ""
                 }
 
@@ -321,17 +435,20 @@ function renderToppers(
 
 
                     <h3>
+
                         ${escapeHTML(
-                            topper.name
+                            topper.name || ""
                         )}
+
                     </h3>
 
 
                     <p>
+
                         ${escapeHTML(
-                            topper.details ||
-                            ""
+                            topper.details || ""
                         )}
+
                     </p>
 
 
@@ -341,11 +458,15 @@ function renderToppers(
                         ?
 
                         `
+
                         <p>
+
                             “${escapeHTML(
                                 topper.review
                             )}”
+
                         </p>
+
                         `
 
                         :
@@ -358,6 +479,7 @@ function renderToppers(
             </article>
 
         `
+
         ).join("");
 
 }
@@ -377,6 +499,11 @@ function renderAlumni(
         );
 
 
+    if (!container) {
+        return;
+    }
+
+
     if (!alumni.length) {
 
         container.innerHTML = `
@@ -389,9 +516,11 @@ function renderAlumni(
                         ALUMNI
                     </div>
 
+
                     <h3>
                         Alumni Coming Soon
                     </h3>
+
 
                     <p>
                         Alumni profiles will
@@ -410,21 +539,35 @@ function renderAlumni(
 
 
     container.innerHTML =
+
         alumni.map(
+
             person => `
 
-            <article class="person-card">
+            <article
+                class="person-card"
+            >
 
                 ${
                     person.photo
+
                     ?
+
                     `
+
                     <img
-                        src="${person.photo}"
-                        alt=""
+                        src="${getImageUrl(
+                            person.photo
+                        )}"
+                        alt="${escapeHTML(
+                            person.name
+                        )}"
                     >
+
                     `
+
                     :
+
                     ""
                 }
 
@@ -437,31 +580,42 @@ function renderAlumni(
 
 
                     <h3>
+
                         ${escapeHTML(
-                            person.name
+                            person.name || ""
                         )}
+
                     </h3>
 
 
                     <p>
+
                         ${escapeHTML(
-                            person.details ||
-                            ""
+                            person.details || ""
                         )}
+
                     </p>
 
 
                     ${
                         person.review
+
                         ?
+
                         `
+
                         <p>
+
                             “${escapeHTML(
                                 person.review
                             )}”
+
                         </p>
+
                         `
+
                         :
+
                         ""
                     }
 
@@ -470,6 +624,7 @@ function renderAlumni(
             </article>
 
         `
+
         ).join("");
 
 }
@@ -489,15 +644,23 @@ function renderReviews(
         );
 
 
+    if (!container) {
+        return;
+    }
+
+
     if (!reviews.length) {
 
         container.innerHTML = `
 
-            <article class="review-card">
+            <article
+                class="review-card"
+            >
 
                 <div class="stars">
                     ★★★★★
                 </div>
+
 
                 <p>
                     Student and parent
@@ -514,10 +677,14 @@ function renderReviews(
 
 
     container.innerHTML =
+
         reviews.map(
+
             review => `
 
-            <article class="review-card">
+            <article
+                class="review-card"
+            >
 
                 <div class="stars">
                     ★★★★★
@@ -525,21 +692,26 @@ function renderReviews(
 
 
                 <p>
+
                     “${escapeHTML(
-                        review.review
+                        review.review || ""
                     )}”
+
                 </p>
 
 
                 <strong>
+
                     ${escapeHTML(
-                        review.name
+                        review.name || ""
                     )}
+
                 </strong>
 
             </article>
 
         `
+
         ).join("");
 
 }
@@ -611,9 +783,13 @@ Thank you.`;
 
 
             const whatsappURL =
+
                 "https://wa.me/" +
+
                 whatsappNumber +
+
                 "?text=" +
+
                 encodeURIComponent(
                     whatsappMessage
                 );
@@ -639,20 +815,31 @@ function escapeHTML(
 ) {
 
     return String(value)
+
         .replace(
             /[&<>"']/g,
+
             character => ({
 
                 "&": "&amp;",
+
                 "<": "&lt;",
+
                 ">": "&gt;",
+
                 '"': "&quot;",
+
                 "'": "&#039;"
 
             }[character])
+
         );
 
 }
 
+
+/* =====================================
+   START WEBSITE
+===================================== */
 
 loadWebsiteData();
