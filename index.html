@@ -1063,15 +1063,29 @@
     const mainNav =
         document.getElementById("mainNav");
 
+    const siteHeader =
+        document.querySelector(".site-header");
 
-    if (menuToggle && mainNav) {
+
+    if (menuToggle && mainNav && siteHeader) {
 
 
         menuToggle.addEventListener(
             "click",
             function () {
 
-                mainNav.classList.toggle("open");
+                const isOpen =
+                    mainNav.classList.toggle("open");
+
+                siteHeader.classList.toggle(
+                    "mobile-open",
+                    isOpen
+                );
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
 
             }
         );
@@ -1086,6 +1100,11 @@
                     function () {
 
                         mainNav.classList.remove("open");
+                        siteHeader.classList.remove("mobile-open");
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
 
                     }
                 );
