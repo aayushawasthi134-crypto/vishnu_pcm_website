@@ -566,3 +566,20 @@ textarea {
         height: 250px;
     }
 }
+/* FACULTY IMAGE FIX */
+
+.faculty-page-card img {
+    width: 100% !important;
+    height: 285px !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    display: block;
+}
+
+.faculty-placeholder {
+    width: 100% !important;
+    height: 285px !important;
+    border-radius: 0 !important;
+    display: grid;
+    place-items: center;
+}
