@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================
+       MOBILE HAMBURGER MENU
+    ========================= */
+
+    const menuBtn = document.querySelector(".menu-btn");
+    const mainNav = document.getElementById("mainNav");
+
+    if (menuBtn && mainNav) {
+
+        menuBtn.addEventListener("click", function (e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            mainNav.classList.toggle("active");
+
+        });
+
+        /* Close menu after clicking a link */
+
+        mainNav.querySelectorAll("a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+                mainNav.classList.remove("active");
+            });
+
+        });
+
+    }
+
+
+    /* =========================
        SCROLL ANIMATION
     ========================= */
 
@@ -11,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ".page-section .gallery-item",
         ".page-section .gallery-empty"
     ].join(", ");
+
 
     const observer = new IntersectionObserver(function (entries) {
 
@@ -28,7 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
         rootMargin: "0px 0px -30px"
     });
 
+
     document.body.classList.add("reveal-enabled");
+
 
     function prepareAnimatedElements() {
 
@@ -39,16 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             element.classList.add("reveal-item");
-            element.style.transitionDelay = `${(index % 4) * 90}ms`;
+
+            element.style.transitionDelay =
+                `${(index % 4) * 90}ms`;
+
             observer.observe(element);
 
         });
 
     }
 
+
     prepareAnimatedElements();
 
-    const contentObserver = new MutationObserver(prepareAnimatedElements);
+
+    const contentObserver = new MutationObserver(
+        prepareAnimatedElements
+    );
+
 
     contentObserver.observe(document.body, {
         childList: true,

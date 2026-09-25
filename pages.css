@@ -843,3 +843,609 @@ textarea {
         height: 180px;
     }
 }
+/* =====================================================
+   VISHNU PCM CLASSES - COMPLETE MOBILE RESPONSIVE CSS
+   ===================================================== */
+
+/* ---------- GLOBAL ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container,
+.page-container,
+.page-section,
+.section-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.site-header {
+    width: 100%;
+    position: relative;
+}
+
+.site-header .container {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.brand {
+    max-width: 80%;
+}
+
+.brand h1,
+.brand h2,
+.brand p {
+    margin: 0;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#mainNav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#mainNav a {
+    white-space: nowrap;
+}
+
+
+/* ---------- PAGE HERO ---------- */
+
+.page-hero {
+    width: 100%;
+    overflow: hidden;
+}
+
+.page-hero h1 {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.page-hero p {
+    max-width: 750px;
+}
+
+
+/* ---------- SECTIONS ---------- */
+
+.page-section {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+}
+
+
+/* ---------- GRIDS ---------- */
+
+.page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+}
+
+.cards-grid {
+    width: 100%;
+}
+
+
+/* ---------- CARDS ---------- */
+
+.card,
+.faculty-card,
+.teacher-card,
+.course-card,
+.review-card,
+.testimonial-card,
+.topper-card,
+.alumni-card,
+.gallery-card {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.card img,
+.faculty-card img,
+.teacher-card img,
+.topper-card img,
+.alumni-card img,
+.gallery-card img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+
+/* ---------- TABLES ---------- */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    max-width: 100%;
+}
+
+
+/* ---------- FORMS ---------- */
+
+input,
+textarea,
+select,
+button {
+    max-width: 100%;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+form {
+    max-width: 100%;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.site-footer {
+    width: 100%;
+    overflow: hidden;
+}
+
+.site-footer .container {
+    width: 100%;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .site-header .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #mainNav {
+        gap: 12px;
+    }
+
+    #mainNav a {
+        font-size: 14px;
+    }
+
+    .page-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .page-hero {
+        padding: 70px 20px;
+    }
+
+    .page-hero h1 {
+        font-size: 42px;
+    }
+
+    .page-section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+    /* GLOBAL */
+
+    body {
+        font-size: 15px;
+    }
+
+    .container,
+    .page-container,
+    .section-container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    /* HEADER */
+
+    .site-header {
+        padding: 12px 0;
+    }
+
+    .site-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .brand {
+        max-width: calc(100% - 50px);
+        font-size: 18px;
+    }
+
+    .brand h1 {
+        font-size: 20px;
+    }
+
+    .brand p {
+        font-size: 11px;
+    }
+
+
+    /* HAMBURGER */
+
+    .menu-btn {
+        display: block;
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+
+
+    /* MOBILE NAV */
+
+    #mainNav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 20px;
+    }
+
+    #mainNav.active {
+        display: flex;
+    }
+
+    #mainNav a {
+        display: block;
+        width: 100%;
+        padding: 13px 5px;
+        white-space: normal;
+    }
+
+
+    /* HERO */
+
+    .page-hero {
+        padding: 55px 15px;
+        text-align: center;
+    }
+
+    .page-hero h1 {
+        font-size: 32px;
+        line-height: 1.2;
+    }
+
+    .page-hero p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* SECTION */
+
+    .page-section {
+        padding: 40px 15px;
+    }
+
+    .page-section h2 {
+        font-size: 28px;
+        line-height: 1.25;
+    }
+
+    .page-section h3 {
+        font-size: 21px;
+    }
+
+
+    /* ALL GRIDS → ONE COLUMN */
+
+    .page-grid,
+    .cards-grid,
+    .faculty-grid,
+    .teachers-grid,
+    .courses-grid,
+    .gallery-events,
+    #galleryEventsGrid,
+    .reviews-grid,
+    .testimonials-grid,
+    .toppers-grid,
+    .alumni-grid {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        gap: 18px;
+    }
+
+
+    /* CARDS */
+
+    .card,
+    .faculty-card,
+    .teacher-card,
+    .course-card,
+    .review-card,
+    .testimonial-card,
+    .topper-card,
+    .alumni-card,
+    .gallery-card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+
+    /* IMAGES */
+
+    .faculty-card img,
+    .teacher-card img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+
+    .topper-card img,
+    .alumni-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .gallery-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+
+
+    /* BUTTONS */
+
+    button,
+    .btn,
+    .primary-btn,
+    .secondary-btn,
+    .cta-btn {
+        max-width: 100%;
+    }
+
+
+    /* FORMS */
+
+    form {
+        width: 100%;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        min-width: 0;
+        font-size: 16px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+
+
+    /* CONTACT */
+
+    .contact-grid,
+    .contact-container,
+    .get-in-touch,
+    .contact-section {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+    }
+
+
+    /* FOOTER */
+
+    .site-footer {
+        text-align: center;
+    }
+
+    .site-footer .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .footer-grid,
+    .footer-columns {
+        grid-template-columns: 1fr !important;
+        gap: 25px;
+    }
+
+
+    /* MODALS */
+
+    #galleryModal,
+    #imageViewer {
+        padding: 10px;
+    }
+
+    #galleryModal .modal-content {
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    #imageViewer img {
+        width: auto;
+        max-width: 95vw;
+        max-height: 80vh;
+        object-fit: contain;
+    }
+
+
+    /* GALLERY PHOTOS */
+
+    .gallery-photos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-photos img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+    }
+
+
+    /* LONG TEXT */
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    a {
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 400px) {
+
+    .page-hero {
+        padding: 45px 12px;
+    }
+
+    .page-hero h1 {
+        font-size: 27px;
+    }
+
+    .page-section {
+        padding: 35px 12px;
+    }
+
+    .page-section h2 {
+        font-size: 25px;
+    }
+
+    .brand h1 {
+        font-size: 18px;
+    }
+
+    .brand p {
+        font-size: 10px;
+    }
+
+    .gallery-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-photos img {
+        height: 190px;
+    }
+
+    .gallery-card img {
+        height: 200px;
+    }
+}@media (max-width: 700px) {
+
+    .site-header {
+        position: relative;
+        z-index: 9999;
+    }
+
+    .menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10001;
+        cursor: pointer;
+    }
+
+    #mainNav {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+
+    #mainNav.active {
+        display: flex !important;
+    }
+
+    #mainNav a {
+        width: 100%;
+        display: block;
+    }
+}
