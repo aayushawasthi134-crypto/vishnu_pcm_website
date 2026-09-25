@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,206 +14,60 @@
 
     <meta name="robots" content="index, follow">
 
-    <link rel="canonical"
-          href="https://vishnupcmwebsite.vercel.app/faculty.html">
+    <link
+        rel="canonical"
+        href="https://vishnupcmwebsite.vercel.app/faculty.html"
+    >
 
+    <!-- MAIN PAGE CSS -->
     <link rel="stylesheet" href="pages.css">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 6%;
-        }
-
-        .logo a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        #mainNav {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-        }
-
-        #mainNav a {
-            text-decoration: none;
-            color: inherit;
-            font-weight: 600;
-        }
-
-        #mainNav a.active {
-            color: #d4af37;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: inherit;
-        }
-
-        .page-section {
-            max-width: 1250px;
-            margin: auto;
-            padding: 80px 6%;
-        }
-
-        .page-heading {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .page-heading h1 {
-            font-size: 46px;
-            margin-bottom: 12px;
-        }
-
-        .page-heading p {
-            font-size: 18px;
-            opacity: 0.8;
-        }
-
-        .faculty-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-
-        .faculty-card {
-            padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            transition: 0.3s ease;
-        }
-
-        .faculty-card:hover {
-            transform: translateY(-7px);
-        }
-
-        .faculty-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 18px;
-        }
-
-        .faculty-card h2 {
-            font-size: 22px;
-            margin: 10px 0;
-        }
-
-        .faculty-card h3 {
-            color: #d4af37;
-            margin: 8px 0 15px;
-        }
-
-        .faculty-card p {
-            line-height: 1.6;
-            opacity: 0.85;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 40px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-        }
-
-        @media (max-width: 1000px) {
-            .faculty-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 700px) {
-
-            header {
-                position: relative;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            #mainNav {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                padding: 20px;
-                background: #111;
-                z-index: 1000;
-            }
-
-            #mainNav.show {
-                display: flex;
-            }
-
-            .page-section {
-                padding: 50px 5%;
-            }
-
-            .page-heading h1 {
-                font-size: 34px;
-            }
-
-            .faculty-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-<header>
+<!-- ================= HEADER ================= -->
 
-    <div class="logo">
-        <a href="index.html">
-            Vishnu PCM Classes
-        </a>
-    </div>
+<header class="site-header">
+
+    <a href="index.html" class="brand">
+
+        <div class="brand-icon">
+            V
+        </div>
+
+        <div>
+            <strong>Vishnu PCM Classes</strong>
+            <small>Learn • Grow • Succeed</small>
+        </div>
+
+    </a>
+
 
     <button
-        class="menu-toggle"
+        class="menu-btn"
         id="menuToggle"
         aria-label="Open menu"
     >
         ☰
     </button>
 
+
     <nav id="mainNav">
 
         <a href="index.html">Home</a>
+
         <a href="about.html">About</a>
+
         <a href="courses.html">Courses</a>
-        <a href="faculty.html" class="active">Faculty</a>
+
+        <a href="faculty.html">Faculty</a>
+
         <a href="results.html">Results</a>
+
         <a href="admissions.html">Admissions</a>
+
         <a href="gallery.html">Gallery</a>
+
         <a href="contact.html">Contact</a>
 
     </nav>
@@ -220,31 +75,49 @@
 </header>
 
 
+<!-- ================= HERO ================= -->
+
+<section class="page-hero">
+
+    <p>VISHNU PCM CLASSES</p>
+
+    <h1>Our Faculty</h1>
+
+    <span>
+        Meet our experienced teachers and mentors
+    </span>
+
+</section>
+
+
+<!-- ================= FACULTY ================= -->
+
 <main>
 
     <section class="page-section">
 
-        <div class="page-heading">
+        <h2>Our Teachers & Mentors</h2>
 
-            <h1>Our Faculty</h1>
-
-            <p>
-                Meet our teachers and mentors at Vishnu PCM Classes.
-            </p>
-
-        </div>
-
-        <div id="facultyGrid" class="faculty-grid"></div>
+        <div
+            id="facultyGrid"
+            class="page-grid"
+        ></div>
 
     </section>
 
 </main>
 
 
-<footer>
+<!-- ================= FOOTER ================= -->
+
+<footer class="site-footer">
 
     <p>
         © 2026 Vishnu PCM Classes. All Rights Reserved.
+    </p>
+
+    <p>
+        Rajajipuram, Lucknow, Uttar Pradesh
     </p>
 
 </footer>
@@ -255,6 +128,8 @@
 const API_URL =
     "https://vishnu-pcm-admin.onrender.com";
 
+
+/* ================= IMAGE URL ================= */
 
 function getImageUrl(photo) {
 
@@ -273,15 +148,21 @@ function getImageUrl(photo) {
 }
 
 
+/* ================= ESCAPE HTML ================= */
+
 function escapeHTML(value) {
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
-    div.textContent = value || "";
+    div.textContent =
+        value || "";
 
     return div.innerHTML;
 }
 
+
+/* ================= LOAD FACULTY ================= */
 
 async function loadFaculty() {
 
@@ -291,10 +172,16 @@ async function loadFaculty() {
     try {
 
         const response =
-            await fetch(`${API_URL}/api/public`);
+            await fetch(
+                `${API_URL}/api/public`
+            );
 
         if (!response.ok) {
-            throw new Error("Unable to load faculty");
+
+            throw new Error(
+                "Unable to load faculty"
+            );
+
         }
 
         const data =
@@ -305,16 +192,22 @@ async function loadFaculty() {
 
         grid.innerHTML = "";
 
+
         if (faculty.length === 0) {
 
             grid.innerHTML = `
-                <div class="no-data">
-                    <h2>No faculty information available.</h2>
+                <div class="info-card">
+
+                    <h3>
+                        No faculty information available.
+                    </h3>
+
                 </div>
             `;
 
             return;
         }
+
 
         faculty.forEach(teacher => {
 
@@ -322,73 +215,97 @@ async function loadFaculty() {
                 document.createElement("div");
 
             card.className =
-                "faculty-card";
+                "faculty-page-card";
 
-            const imageHTML =
-                teacher.photo
-                ? `
+
+            /* IMAGE */
+
+            let imageHTML = "";
+
+            if (teacher.photo) {
+
+                imageHTML = `
                     <img
                         src="${getImageUrl(teacher.photo)}"
                         alt="${escapeHTML(teacher.name)}"
+                        loading="lazy"
                     >
-                `
-                : `
-                    <div style="
-                        width:150px;
-                        height:150px;
-                        margin:0 auto 18px;
-                        border-radius:50%;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                        background:#333;
-                        font-size:45px;
-                    ">
+                `;
+
+            } else {
+
+                imageHTML = `
+                    <div class="faculty-placeholder">
                         👨‍🏫
                     </div>
                 `;
+
+            }
+
+
+            /* CARD */
 
             card.innerHTML = `
 
                 ${imageHTML}
 
-                <h2>
-                    ${escapeHTML(teacher.name)}
-                </h2>
+                <div>
 
-                <h3>
-                    ${escapeHTML(teacher.subject)}
-                </h3>
+                    <h3>
+                        ${escapeHTML(
+                            teacher.name
+                        )}
+                    </h3>
 
-                <p>
-                    ${escapeHTML(
-                        teacher.description || ""
-                    )}
-                </p>
+                    <span>
+                        ${escapeHTML(
+                            teacher.subject
+                        )}
+                    </span>
+
+                    <p>
+                        ${escapeHTML(
+                            teacher.description || ""
+                        )}
+                    </p>
+
+                </div>
 
             `;
+
 
             grid.appendChild(card);
 
         });
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(error);
 
         grid.innerHTML = `
-            <div class="no-data">
-                <h2>Unable to load faculty.</h2>
-                <p>Please try again later.</p>
+
+            <div class="info-card">
+
+                <h3>
+                    Unable to load faculty.
+                </h3>
+
+                <p>
+                    Please try again later.
+                </p>
+
             </div>
+
         `;
 
     }
+
 }
 
 
-loadFaculty();
-
+/* ================= MOBILE MENU ================= */
 
 const menuToggle =
     document.getElementById("menuToggle");
@@ -400,22 +317,35 @@ const mainNav =
 menuToggle.addEventListener(
     "click",
     () => {
-        mainNav.classList.toggle("show");
+
+        mainNav.classList.toggle("open");
+
     }
 );
 
 
-mainNav.querySelectorAll("a").forEach(link => {
+mainNav
+    .querySelectorAll("a")
+    .forEach(link => {
 
-    link.addEventListener("click", () => {
+        link.addEventListener(
+            "click",
+            () => {
 
-        mainNav.classList.remove("show");
+                mainNav.classList.remove("open");
+
+            }
+        );
 
     });
 
-});
+
+/* ================= START ================= */
+
+loadFaculty();
 
 </script>
 
 </body>
+
 </html>
