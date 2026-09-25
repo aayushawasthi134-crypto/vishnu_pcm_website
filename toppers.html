@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Faculty | Vishnu PCM Classes Rajajipuram</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Our Toppers | Vishnu PCM Classes</title>
 
     <meta
         name="description"
-        content="Meet the experienced faculty of Vishnu PCM Classes in Rajajipuram, Lucknow."
+        content="View the academic achievements and toppers of Vishnu PCM Classes in Rajajipuram, Lucknow."
     >
 
     <meta name="robots" content="index, follow">
 
-    <link rel="canonical"
-          href="https://vishnupcmwebsite.vercel.app/faculty.html">
+    <link
+        rel="canonical"
+        href="https://vishnupcmwebsite.vercel.app/toppers.html"
+    >
 
     <link rel="stylesheet" href="pages.css">
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -87,13 +93,13 @@
             opacity: 0.8;
         }
 
-        .faculty-grid {
+        .toppers-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 25px;
         }
 
-        .faculty-card {
+        .topper-card {
             padding: 25px;
             border-radius: 18px;
             text-align: center;
@@ -102,29 +108,31 @@
             transition: 0.3s ease;
         }
 
-        .faculty-card:hover {
+        .topper-card:hover {
             transform: translateY(-7px);
         }
 
-        .faculty-card img {
-            width: 150px;
-            height: 150px;
+        .topper-card img {
+            width: 180px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 15px;
             margin-bottom: 18px;
         }
 
-        .faculty-card h2 {
+        .topper-card h2 {
             font-size: 22px;
             margin: 10px 0;
         }
 
-        .faculty-card h3 {
+        .topper-details {
             color: #d4af37;
-            margin: 8px 0 15px;
+            font-weight: 700;
+            line-height: 1.6;
         }
 
-        .faculty-card p {
+        .topper-review {
+            margin-top: 15px;
             line-height: 1.6;
             opacity: 0.85;
         }
@@ -140,9 +148,11 @@
         }
 
         @media (max-width: 1000px) {
-            .faculty-grid {
+
+            .toppers-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media (max-width: 700px) {
@@ -179,22 +189,29 @@
                 font-size: 34px;
             }
 
-            .faculty-grid {
+            .toppers-grid {
                 grid-template-columns: 1fr;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
+
 <header>
 
     <div class="logo">
+
         <a href="index.html">
             Vishnu PCM Classes
         </a>
+
     </div>
+
 
     <button
         class="menu-toggle"
@@ -204,15 +221,23 @@
         ☰
     </button>
 
+
     <nav id="mainNav">
 
         <a href="index.html">Home</a>
+
         <a href="about.html">About</a>
+
         <a href="courses.html">Courses</a>
-        <a href="faculty.html" class="active">Faculty</a>
+
+        <a href="faculty.html">Faculty</a>
+
         <a href="results.html">Results</a>
+
         <a href="admissions.html">Admissions</a>
+
         <a href="gallery.html">Gallery</a>
+
         <a href="contact.html">Contact</a>
 
     </nav>
@@ -226,15 +251,19 @@
 
         <div class="page-heading">
 
-            <h1>Our Faculty</h1>
+            <h1>Our Toppers</h1>
 
             <p>
-                Meet our teachers and mentors at Vishnu PCM Classes.
+                Celebrating the academic achievements of our students.
             </p>
 
         </div>
 
-        <div id="facultyGrid" class="faculty-grid"></div>
+
+        <div
+            id="toppersGrid"
+            class="toppers-grid"
+        ></div>
 
     </section>
 
@@ -275,18 +304,20 @@ function getImageUrl(photo) {
 
 function escapeHTML(value) {
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
-    div.textContent = value || "";
+    div.textContent =
+        value || "";
 
     return div.innerHTML;
 }
 
 
-async function loadFaculty() {
+async function loadToppers() {
 
     const grid =
-        document.getElementById("facultyGrid");
+        document.getElementById("toppersGrid");
 
     try {
 
@@ -294,79 +325,92 @@ async function loadFaculty() {
             await fetch(`${API_URL}/api/public`);
 
         if (!response.ok) {
-            throw new Error("Unable to load faculty");
+            throw new Error("Unable to load toppers");
         }
 
         const data =
             await response.json();
 
-        const faculty =
-            data.faculty || [];
+        const toppers =
+            data.toppers || [];
 
         grid.innerHTML = "";
 
-        if (faculty.length === 0) {
+
+        if (toppers.length === 0) {
 
             grid.innerHTML = `
                 <div class="no-data">
-                    <h2>No faculty information available.</h2>
+                    <h2>No topper information available.</h2>
                 </div>
             `;
 
             return;
         }
 
-        faculty.forEach(teacher => {
+
+        toppers.forEach(topper => {
 
             const card =
                 document.createElement("div");
 
             card.className =
-                "faculty-card";
+                "topper-card";
+
 
             const imageHTML =
-                teacher.photo
+                topper.photo
                 ? `
                     <img
-                        src="${getImageUrl(teacher.photo)}"
-                        alt="${escapeHTML(teacher.name)}"
+                        src="${getImageUrl(topper.photo)}"
+                        alt="${escapeHTML(topper.name)}"
                     >
                 `
                 : `
                     <div style="
-                        width:150px;
-                        height:150px;
+                        width:180px;
+                        height:180px;
                         margin:0 auto 18px;
-                        border-radius:50%;
+                        border-radius:15px;
                         display:flex;
                         align-items:center;
                         justify-content:center;
                         background:#333;
-                        font-size:45px;
+                        font-size:50px;
                     ">
-                        👨‍🏫
+                        🏆
                     </div>
                 `;
+
 
             card.innerHTML = `
 
                 ${imageHTML}
 
                 <h2>
-                    ${escapeHTML(teacher.name)}
+                    ${escapeHTML(topper.name)}
                 </h2>
 
-                <h3>
-                    ${escapeHTML(teacher.subject)}
-                </h3>
-
-                <p>
+                <div class="topper-details">
                     ${escapeHTML(
-                        teacher.description || ""
+                        topper.details || ""
                     )}
-                </p>
+                </div>
+
+                ${
+                    topper.review
+                    ? `
+                        <p class="topper-review">
+                            "${escapeHTML(
+                                topper.review
+                            )}"
+                        </p>
+                    `
+                    : ""
+                }
 
             `;
+
 
             grid.appendChild(card);
 
@@ -378,16 +422,17 @@ async function loadFaculty() {
 
         grid.innerHTML = `
             <div class="no-data">
-                <h2>Unable to load faculty.</h2>
+                <h2>Unable to load toppers.</h2>
                 <p>Please try again later.</p>
             </div>
         `;
 
     }
+
 }
 
 
-loadFaculty();
+loadToppers();
 
 
 const menuToggle =
@@ -400,22 +445,28 @@ const mainNav =
 menuToggle.addEventListener(
     "click",
     () => {
+
         mainNav.classList.toggle("show");
+
     }
 );
 
 
 mainNav.querySelectorAll("a").forEach(link => {
 
-    link.addEventListener("click", () => {
+    link.addEventListener(
+        "click",
+        () => {
 
-        mainNav.classList.remove("show");
+            mainNav.classList.remove("show");
 
-    });
+        }
+    );
 
 });
 
 </script>
+
 
 </body>
 </html>
