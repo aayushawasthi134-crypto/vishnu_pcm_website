@@ -9,22 +9,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (menuBtn && mainNav) {
 
-        menuBtn.addEventListener("click", function (e) {
+        const setMenuState = function (isOpen) {
+            mainNav.classList.toggle("active", isOpen);
+            mainNav.classList.toggle("open", isOpen);
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
+            menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        };
+
+        menuBtn.onclick = function (e) {
 
             e.preventDefault();
             e.stopPropagation();
 
-            mainNav.classList.toggle("active");
+            setMenuState(!mainNav.classList.contains("active"));
 
+        };
+
+        document.addEventListener("click", function (event) {
+            const clickedInsideHeader = event.target && menuBtn.contains(event.target);
+            const clickedInsideNav = event.target && mainNav.contains(event.target);
+
+            if (!clickedInsideHeader && !clickedInsideNav) {
+                setMenuState(false);
+            }
         });
-
-        /* Close menu after clicking a link */
 
         mainNav.querySelectorAll("a").forEach(function (link) {
 
-            link.addEventListener("click", function () {
-                mainNav.classList.remove("active");
-            });
+            link.onclick = function () {
+                setMenuState(false);
+            };
 
         });
 

@@ -1156,6 +1156,7 @@ form {
         padding: 10px 20px;
     }
 
+    #mainNav.open,
     #mainNav.active {
         display: flex;
     }

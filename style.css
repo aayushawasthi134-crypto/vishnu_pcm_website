@@ -1704,6 +1704,11 @@ body {
     transition: 0.3s ease;
 }
 
+.site-header nav.open,
+.site-header nav.active {
+    display: flex;
+}
+
 .site-header nav a:hover {
     background: rgba(215, 168, 62, 0.18);
     color: #d7a83e;
@@ -2083,7 +2088,8 @@ textarea {
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .site-header nav.open {
+    .site-header nav.open,
+    .site-header nav.active {
         display: flex;
     }
 
