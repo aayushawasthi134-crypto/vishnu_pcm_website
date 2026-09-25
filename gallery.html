@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Gallery | Vishnu PCM Classes Rajajipuram
+    </title>
+
+    <meta
+        name="description"
+        content="View events, photos and memorable moments from Vishnu PCM Classes, Rajajipuram, Lucknow."
+    >
+
+    <link
+        rel="stylesheet"
+        href="pages.css"
+    >
+
+
+    <style>
+
+        .gallery-events-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 28px;
+
+            margin-top: 35px;
+
+        }
+
+
+        .gallery-event-card {
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid #eadede;
+
+            box-shadow:
+                0 10px 30px
+                rgba(101, 21, 21, 0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            cursor: pointer;
+
+        }
+
+
+        .gallery-event-card:hover {
+
+            transform:
+                translateY(-7px);
+
+            box-shadow:
+                0 18px 40px
+                rgba(101, 21, 21, 0.14);
+
+        }
+
+
+        .gallery-event-cover {
+
+            height: 240px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #651515,
+                    #9d1919
+                );
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .gallery-event-cover img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.5s ease;
+
+        }
+
+
+        .gallery-event-card:hover
+        .gallery-event-cover img {
+
+            transform:
+                scale(1.05);
+
+        }
+
+
+        .gallery-cover-placeholder {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: grid;
+
+            place-items: center;
+
+            color: #d7a83e;
+
+            font-size: 55px;
+
+        }
+
+
+        .photo-count {
+
+            position: absolute;
+
+            right: 12px;
+
+            bottom: 12px;
+
+            background:
+                rgba(0,0,0,0.75);
+
+            color: #fff;
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .gallery-event-content {
+
+            padding: 22px;
+
+        }
+
+
+        .gallery-event-content h3 {
+
+            margin:
+                0 0 8px;
+
+            color: #651515;
+
+            font-size: 22px;
+
+        }
+
+
+        .gallery-event-date {
+
+            color: #c1922d;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+        }
+
+
+        .gallery-event-content p {
+
+            color: #687386;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .view-event-btn {
+
+            display: inline-block;
+
+            padding:
+                10px 17px;
+
+            background: #d7a83e;
+
+            color: #651515;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+        }
+
+
+        .gallery-empty {
+
+            grid-column:
+                1 / -1;
+
+            text-align: center;
+
+            background: #fff;
+
+            padding: 55px 25px;
+
+            border-radius: 15px;
+
+            border:
+                1px dashed #d8c8c8;
+
+        }
+
+
+        /* MODAL */
+
+        .gallery-modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.88);
+
+            z-index: 5000;
+
+            overflow-y: auto;
+
+            padding: 40px 20px;
+
+        }
+
+
+        .gallery-modal.open {
+
+            display: block;
+
+        }
+
+
+        .gallery-modal-inner {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+        }
+
+
+        .gallery-modal-header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap: 20px;
+
+            color: #fff;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .gallery-modal-header h2 {
+
+            margin: 0;
+
+            color: #fff;
+
+        }
+
+
+        .gallery-modal-header p {
+
+            color: #ddd;
+
+            margin-bottom: 0;
+
+        }
+
+
+        .close-gallery {
+
+            width: 45px;
+
+            height: 45px;
+
+            border: 1px solid
+                rgba(255,255,255,0.4);
+
+            background:
+                rgba(255,255,255,0.1);
+
+            color: #fff;
+
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .gallery-photo-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .gallery-photo-box {
+
+            background: #fff;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+        }
+
+
+        .gallery-photo-box img {
+
+            width: 100%;
+
+            height: 260px;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.3s ease;
+
+        }
+
+
+        .gallery-photo-box:hover img {
+
+            transform: scale(1.04);
+
+        }
+
+
+        /* IMAGE VIEWER */
+
+        .image-viewer {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 7000;
+
+            background:
+                rgba(0,0,0,0.95);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+        }
+
+
+        .image-viewer.open {
+
+            display: flex;
+
+        }
+
+
+        .image-viewer img {
+
+            max-width: 95vw;
+
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+
+        }
+
+
+        .close-viewer {
+
+            position: fixed;
+
+            top: 20px;
+
+            right: 25px;
+
+            width: 45px;
+
+            height: 45px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            color: #651515;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .gallery-events-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .gallery-photo-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .gallery-events-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .gallery-photo-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .gallery-event-cover {
+
+                height: 230px;
+
+            }
+
+            .gallery-photo-box img {
+
+                height: 250px;
+
+            }
+
+            .gallery-modal {
+
+                padding:
+                    25px 12px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                V
+            </div>
+
+            <div>
+
+                <strong>
+                    Vishnu PCM Classes
+                </strong>
+
+                <small>
+                    Learn • Grow • Succeed
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <button
+            class="menu-btn"
+            id="menuToggle"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+
+        <nav id="mainNav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="courses.html">
+                Courses
+            </a>
+
+            <a href="faculty.html">
+                Faculty
+            </a>
+
+            <a href="results.html">
+                Results
+            </a>
+
+            <a href="admissions.html">
+                Admissions
+            </a>
+
+            <a href="gallery.html">
+                Gallery
+            </a>
+
+            <a href="alumni.html">
+                Alumni
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="page-hero">
+
+            <p>
+                VISHNU PCM CLASSES
+            </p>
+
+            <h1>
+                Our Gallery
+            </h1>
+
+            <span>
+                Moments, memories and experiences from Vishnu PCM Classes.
+            </span>
+
+        </section>
+
+
+        <!-- EVENTS -->
+
+        <section class="page-section">
+
+            <p class="eyebrow">
+                OUR MOMENTS
+            </p>
+
+            <h2>
+                Events & Memories
+            </h2>
+
+            <p>
+                Explore memorable events and moments
+                from Vishnu PCM Classes.
+            </p>
+
+
+            <div
+                class="gallery-events-grid"
+                id="galleryEventsGrid"
+            >
+
+                <div class="gallery-empty">
+
+                    <h3>
+                        Loading Gallery...
+                    </h3>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- GALLERY MODAL -->
+
+    <div
+        class="gallery-modal"
+        id="galleryModal"
+    >
+
+        <div class="gallery-modal-inner">
+
+            <div class="gallery-modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Event
+                    </h2>
+
+                    <p id="modalDescription"></p>
+
+                </div>
+
+
+                <button
+                    class="close-gallery"
+                    onclick="closeGalleryModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="gallery-photo-grid"
+                id="galleryPhotoGrid"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- IMAGE VIEWER -->
+
+    <div
+        class="image-viewer"
+        id="imageViewer"
+    >
+
+        <button
+            class="close-viewer"
+            onclick="closeImageViewer()"
+        >
+            ×
+        </button>
+
+        <img
+            id="viewerImage"
+            src=""
+            alt="Gallery image"
+        >
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+
+        <strong>
+            Vishnu PCM Classes
+        </strong>
+
+        <p>
+            Rajajipuram, Lucknow • Classes 5th to 12th • All Boards
+        </p>
+
+        <a href="tel:+919451470559">
+            +91 94514 70559
+        </a>
+
+    </footer>
+
+
+    <!-- COMMON JS -->
+
+    <script src="pages.js"></script>
+
+
+    <!-- GALLERY JS -->
+
+    <script>
+
+        const API_URL =
+            "https://vishnu-pcm-admin.onrender.com";
+
+
+        const galleryEventsGrid =
+            document.getElementById(
+                "galleryEventsGrid"
+            );
+
+
+        const galleryModal =
+            document.getElementById(
+                "galleryModal"
+            );
+
+
+        const galleryPhotoGrid =
+            document.getElementById(
+                "galleryPhotoGrid"
+            );
+
+
+        const modalTitle =
+            document.getElementById(
+                "modalTitle"
+            );
+
+
+        const modalDescription =
+            document.getElementById(
+                "modalDescription"
+            );
+
+
+        const imageViewer =
+            document.getElementById(
+                "imageViewer"
+            );
+
+
+        const viewerImage =
+            document.getElementById(
+                "viewerImage"
+            );
+
+
+        function escapeHTML(value) {
+
+            return String(value || "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+
+        }
+
+
+        async function loadGallery() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/gallery`
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail ||
+                        "Unable to load gallery"
+                    );
+
+                }
+
+
+                renderEvents(
+                    data.gallery || []
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                galleryEventsGrid.innerHTML = `
+
+                    <div class="gallery-empty">
+
+                        <h3>
+                            Gallery unavailable
+                        </h3>
+
+                        <p>
+                            Please try again later.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        function renderEvents(events) {
+
+            if (!events.length) {
+
+                galleryEventsGrid.innerHTML = `
+
+                    <div class="gallery-empty">
+
+                        <h3>
+                            Gallery Coming Soon
+                        </h3>
+
+                        <p>
+                            Photos and memorable events
+                            will be added here soon.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            galleryEventsGrid.innerHTML =
+                events.map((event, index) => {
+
+                    const cover =
+                        event.cover_photo
+                            ? `
+                                <img
+                                    src="${event.cover_photo}"
+                                    alt="${escapeHTML(event.title)}"
+                                    loading="lazy"
+                                >
+                            `
+                            : `
+                                <div class="gallery-cover-placeholder">
+                                    📷
+                                </div>
+                            `;
+
+
+                    return `
+
+                        <article
+                            class="gallery-event-card"
+                            onclick="openGalleryEvent(${index})"
+                        >
+
+                            <div class="gallery-event-cover">
+
+                                ${cover}
+
+                                <span class="photo-count">
+                                    ${event.photo_count || 0}
+                                    Photos
+                                </span>
+
+                            </div>
+
+
+                            <div class="gallery-event-content">
+
+                                <h3>
+                                    ${escapeHTML(event.title)}
+                                </h3>
+
+                                ${
+                                    event.event_date
+                                        ? `
+                                            <div class="gallery-event-date">
+                                                📅
+                                                ${escapeHTML(
+                                                    event.event_date
+                                                )}
+                                            </div>
+                                        `
+                                        : ""
+                                }
+
+
+                                <p>
+                                    ${escapeHTML(
+                                        event.description ||
+                                        "Memorable moments from Vishnu PCM Classes."
+                                    )}
+                                </p>
+
+
+                                <span class="view-event-btn">
+                                    View Photos →
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                }).join("");
+
+
+            window.galleryEvents =
+                events;
+
+        }
+
+
+        function openGalleryEvent(index) {
+
+            const event =
+                window.galleryEvents[index];
+
+
+            if (!event) return;
+
+
+            modalTitle.textContent =
+                event.title;
+
+
+            modalDescription.textContent =
+                event.description || "";
+
+
+            const photos =
+                event.photos || [];
+
+
+            if (!photos.length) {
+
+                galleryPhotoGrid.innerHTML = `
+
+                    <div
+                        style="
+                            grid-column:1/-1;
+                            color:white;
+                            text-align:center;
+                            padding:40px;
+                        "
+                    >
+
+                        No photos available for this event yet.
+
+                    </div>
+
+                `;
+
+            } else {
+
+                galleryPhotoGrid.innerHTML =
+                    photos.map(photo => {
+
+                        return `
+
+                            <div
+                                class="gallery-photo-box"
+                                onclick="openImageViewer(
+                                    '${photo.photo_url}'
+                                )"
+                            >
+
+                                <img
+                                    src="${photo.photo_url}"
+                                    alt="${escapeHTML(event.title)}"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+                        `;
+
+                    }).join("");
+
+            }
+
+
+            galleryModal.classList.add(
+                "open"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeGalleryModal() {
+
+            galleryModal.classList.remove(
+                "open"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        function openImageViewer(
+            imageUrl
+        ) {
+
+            viewerImage.src =
+                imageUrl;
+
+
+            imageViewer.classList.add(
+                "open"
+            );
+
+        }
+
+
+        function closeImageViewer() {
+
+            imageViewer.classList.remove(
+                "open"
+            );
+
+            viewerImage.src = "";
+
+        }
+
+
+        galleryModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    galleryModal
+                ) {
+
+                    closeGalleryModal();
+
+                }
+
+            }
+        );
+
+
+        imageViewer.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    imageViewer
+                ) {
+
+                    closeImageViewer();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeImageViewer();
+                    closeGalleryModal();
+
+                }
+
+            }
+        );
+
+
+        loadGallery();
+
+    </script>
+
+</body>
+
+</html>

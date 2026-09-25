@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Results & Achievements | Vishnu PCM Classes</title>
+
+    <meta name="description"
+        content="View academic results and achievements of students at Vishnu PCM Classes, Rajajipuram, Lucknow.">
+
+    <link rel="stylesheet" href="pages.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+
+        <a href="index.html" class="brand">
+
+            <div class="brand-icon">V</div>
+
+            <div>
+                <strong>Vishnu PCM Classes</strong>
+                <small>Learn • Grow • Succeed</small>
+            </div>
+
+        </a>
+
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+            ☰
+        </button>
+
+        <nav id="mainNav">
+            <a href="index.html" target="_blank" rel="noopener">Home</a>
+            <a href="about.html" target="_blank" rel="noopener">About</a>
+            <a href="courses.html" target="_blank" rel="noopener">Courses</a>
+            <a href="faculty.html" target="_blank" rel="noopener">Faculty</a>
+            <a href="results.html" target="_blank" rel="noopener">Results</a>
+            <a href="admissions.html" target="_blank" rel="noopener">Admissions</a>
+            <a href="gallery.html" target="_blank" rel="noopener">Gallery</a>
+            <a href="alumni.html" target="_blank" rel="noopener">Alumni</a>
+            <a href="contact.html" target="_blank" rel="noopener">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- HERO -->
+        <section class="page-hero">
+
+            <p>RESULTS & ACHIEVEMENTS</p>
+
+            <h1>Our Students' Achievements</h1>
+
+            <span>
+                Celebrating dedication, hard work and academic progress.
+            </span>
+
+        </section>
+
+
+        <!-- RESULTS -->
+        <section class="page-section">
+
+            <p class="eyebrow">
+                STUDENT SUCCESS
+            </p>
+
+            <h2>
+                Academic Results
+            </h2>
+
+            <p>
+                At Vishnu PCM Classes, we focus on concept clarity,
+                regular practice and consistent academic guidance.
+            </p>
+
+            <div class="page-grid">
+
+                <article class="info-card">
+
+                    <span class="number">01</span>
+
+                    <h3>
+                        Strong Concepts
+                    </h3>
+
+                    <p>
+                        Students are encouraged to build a strong
+                        understanding of fundamental concepts.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <span class="number">02</span>
+
+                    <h3>
+                        Regular Practice
+                    </h3>
+
+                    <p>
+                        Regular assignments, revision and practice
+                        help students prepare effectively.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <span class="number">03</span>
+
+                    <h3>
+                        Academic Guidance
+                    </h3>
+
+                    <p>
+                        Personal attention and guidance help students
+                        improve their academic performance.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <span class="number">04</span>
+
+                    <h3>
+                        Student Progress
+                    </h3>
+
+                    <p>
+                        We celebrate the continuous progress and
+                        achievements of our students.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- TOPPERS -->
+        <section class="page-section">
+
+            <p class="eyebrow">
+                OUR STUDENTS
+            </p>
+
+            <h2>
+                Toppers & Achievers
+            </h2>
+
+            <p>
+                Meet some of the students whose dedication and
+                consistent efforts have made us proud.
+            </p>
+
+            <div id="resultsGrid" class="page-grid">
+
+                <div class="info-card">
+                    <h3>Loading Results...</h3>
+                    <p>Please wait while student achievements are loaded.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+
+        <strong>
+            Vishnu PCM Classes
+        </strong>
+
+        <p>
+            Rajajipuram, Lucknow • Classes 5th to 12th • All Boards
+        </p>
+
+        <a href="tel:+919451470559">
+            +91 94514 70559
+        </a>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        const menuToggle = document.getElementById("menuToggle");
+        const mainNav = document.getElementById("mainNav");
+
+        menuToggle.addEventListener("click", () => {
+            mainNav.classList.toggle("open");
+        });
+
+        mainNav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("open");
+            });
+        });
+
+
+        const API_URL = "https://vishnu-pcm-admin.onrender.com";
+
+
+        function getImageUrl(photo) {
+
+            if (!photo) return "";
+
+            if (
+                photo.startsWith("http://") ||
+                photo.startsWith("https://")
+            ) {
+                return photo;
+            }
+
+            return API_URL + photo;
+        }
+
+
+        function escapeHTML(value) {
+
+            if (!value) return "";
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        async function loadResults() {
+
+            const grid = document.getElementById("resultsGrid");
+
+            try {
+
+                const response = await fetch(`${API_URL}/api/public`);
+
+                if (!response.ok) {
+                    throw new Error("Failed to load results");
+                }
+
+                const data = await response.json();
+
+                const toppers = data.toppers || [];
+
+                if (toppers.length === 0) {
+
+                    grid.innerHTML = `
+                        <div class="info-card">
+                            <h3>Results Coming Soon</h3>
+                            <p>
+                                Student achievements and results
+                                will be updated here.
+                            </p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                grid.innerHTML = toppers.map(student => {
+
+                    const image = getImageUrl(student.photo);
+
+                    return `
+                        <article class="info-card">
+
+                            ${
+                                image
+                                ? `
+                                    <img
+                                        src="${image}"
+                                        alt="${escapeHTML(student.name)}"
+                                        style="
+                                            width:100%;
+                                            height:280px;
+                                            object-fit:cover;
+                                            display:block;
+                                            margin-bottom:20px;
+                                        "
+                                    >
+                                  `
+                                : ""
+                            }
+
+                            <h3>
+                                ${escapeHTML(student.name)}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(student.details)}
+                            </p>
+
+                            ${
+                                student.review
+                                ? `
+                                    <p>
+                                        <strong>Student Review:</strong><br>
+                                        ${escapeHTML(student.review)}
+                                    </p>
+                                  `
+                                : ""
+                            }
+
+                        </article>
+                    `;
+
+                }).join("");
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                grid.innerHTML = `
+                    <div class="info-card">
+
+                        <h3>
+                            Results
+                        </h3>
+
+                        <p>
+                            Student results will be displayed here.
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        loadResults();
+
+    </script>
+<script src="pages.js"></script>
+</body>
+
+</html>

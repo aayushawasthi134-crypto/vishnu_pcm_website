@@ -104,6 +104,10 @@ body {
     transform: translateY(-1px);
 }
 
+.site-header.no-nav-animation nav a {
+    transition: none;
+}
+
 .menu-btn {
     display: none;
     background: transparent;
@@ -434,6 +438,76 @@ textarea {
     color: #d7a83e;
     text-decoration: none;
     font-weight: 700;
+}
+
+/* =========================
+   PAGE ANIMATIONS
+========================= */
+
+@keyframes heroRise {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes accentDrift {
+    from {
+        transform: scaleX(0.75);
+        opacity: 0.35;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.page-hero {
+    animation: heroRise 0.8s ease both;
+}
+
+.page-hero::before,
+.page-hero::after {
+    animation: accentDrift 1.2s ease both;
+}
+
+.reveal-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-enabled .reveal-item {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal-enabled .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal-enabled .reveal-item {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 /* =========================
