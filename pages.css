@@ -657,3 +657,189 @@ textarea {
     display: grid;
     place-items: center;
 }
+/* ================================
+   GALLERY MOBILE RESPONSIVE
+================================ */
+
+/* Event cards */
+.gallery-events,
+#galleryEventsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Gallery event card */
+.gallery-card {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+/* Cover image */
+.gallery-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+
+    .gallery-events,
+    #galleryEventsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .gallery-card img {
+        height: 210px;
+    }
+
+    .page-section {
+        padding: 50px 20px;
+    }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    .gallery-events,
+    #galleryEventsGrid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        width: 100%;
+    }
+
+    .gallery-card {
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .gallery-card img {
+        height: 220px;
+        width: 100%;
+    }
+
+    .gallery-card h3 {
+        font-size: 20px;
+    }
+
+    .gallery-card p {
+        font-size: 14px;
+    }
+
+    .page-hero {
+        padding: 60px 20px;
+    }
+
+    .page-hero h1 {
+        font-size: 34px;
+    }
+
+    .page-hero p {
+        font-size: 15px;
+    }
+
+    .page-section {
+        padding: 40px 15px;
+    }
+
+    /* Modal */
+    #galleryModal {
+        padding: 15px;
+    }
+
+    #galleryModal .modal-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    /* Photos inside event */
+    .gallery-photos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-photos img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* Full image viewer */
+    #imageViewer {
+        padding: 10px;
+    }
+
+    #imageViewer img {
+        max-width: 95vw;
+        max-height: 80vh;
+        object-fit: contain;
+    }
+
+    /* Close buttons */
+    .modal-close,
+    .viewer-close {
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+    }
+
+    /* Header */
+    .site-header {
+        padding: 12px 15px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    #mainNav {
+        width: 100%;
+    }
+
+    #mainNav a {
+        display: block;
+        padding: 12px 0;
+    }
+}
+
+
+/* ================================
+   VERY SMALL PHONES
+================================ */
+
+@media (max-width: 380px) {
+
+    .page-hero h1 {
+        font-size: 28px;
+    }
+
+    .gallery-card img {
+        height: 190px;
+    }
+
+    .gallery-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-photos img {
+        height: 180px;
+    }
+}
