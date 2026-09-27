@@ -237,9 +237,15 @@ header {
 
     gap: 10px;
 
-    justify-content: space-between;
+    justify-content: flex-start;
 
     align-items: center;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #d7a83e rgba(255,255,255,0.08);
 
 }
 
@@ -249,7 +255,8 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 1 1 0;
+    flex: 0 0 auto;
+    min-width: 190px;
     min-height: 52px;
     background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(215,168,62,0.12));
     color: #fff8ea;
