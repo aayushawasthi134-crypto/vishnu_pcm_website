@@ -235,17 +235,13 @@ header {
 
     flex-wrap: nowrap;
 
-    gap: 10px;
+    gap: 8px;
 
-    justify-content: flex-start;
+    justify-content: space-between;
 
     align-items: center;
 
-    overflow-x: auto;
-
-    scrollbar-width: thin;
-
-    scrollbar-color: #d7a83e rgba(255,255,255,0.08);
+    overflow: hidden;
 
 }
 
@@ -255,17 +251,16 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 auto;
-    min-width: 190px;
+    flex: 1 1 0;
     min-height: 52px;
     background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(215,168,62,0.12));
     color: #fff8ea;
     border: 1px solid rgba(215, 168, 62, 0.9);
     border-radius: 14px;
-    padding: 10px 12px;
+    padding: 8px 10px;
     font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.1px;
+    font-size: 11px;
+    letter-spacing: 0.08px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14), inset 0 0 0 1px rgba(255,255,255,0.07);
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     cursor: pointer;
