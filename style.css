@@ -340,6 +340,27 @@ nav a:hover {
 }
 
 
+.highlight-text {
+
+    display: inline-block;
+
+    padding: 4px 12px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 214, 102, 0.18);
+
+    color: #fff7d6;
+
+    font-weight: 800;
+
+    box-shadow: 0 0 0 1px rgba(255, 214, 102, 0.35);
+
+    text-shadow: 0 0 12px rgba(255, 214, 102, 0.45);
+
+}
+
+
 .hero-buttons {
 
     display: flex;
