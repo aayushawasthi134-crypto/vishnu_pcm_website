@@ -112,3 +112,92 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+/* =========================================
+   PUBLIC REVIEW SUBMISSION
+========================================= */
+
+const reviewForm = document.getElementById("reviewForm");
+
+if (reviewForm) {
+    reviewForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const nameInput = document.getElementById("reviewName");
+        const reviewInput = document.getElementById("reviewText");
+        const button = document.getElementById("reviewSubmitBtn");
+        const message = document.getElementById("reviewMessage");
+
+        if (!nameInput || !reviewInput || !button || !message) {
+            console.error("Review form elements are missing.");
+            return;
+        }
+
+        const name = nameInput.value.trim();
+        const review = reviewInput.value.trim();
+
+        message.textContent = "";
+        message.className = "review-form-message";
+
+        if (!name || !review) {
+            message.textContent = "Please enter your name and review.";
+            message.className = "review-form-message error";
+            return;
+        }
+
+        const originalButtonText = button.textContent;
+
+        button.disabled = true;
+        button.textContent = "Submitting...";
+
+        try {
+            const formData = new FormData();
+
+            formData.append("name", name);
+            formData.append("review", review);
+
+            const response = await fetch(`${API_URL}/api/reviews`, {
+                method: "POST",
+                body: formData
+            });
+
+            const responseText = await response.text();
+
+            let data = {};
+
+            try {
+                data = responseText ? JSON.parse(responseText) : {};
+            } catch {
+                data = {};
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    data.detail ||
+                    data.message ||
+                    "Unable to submit your review. Please try again."
+                );
+            }
+
+            message.textContent =
+                "Thank you! Your review has been submitted and is waiting for admin approval.";
+
+            message.className = "review-form-message success";
+
+            reviewForm.reset();
+
+        } catch (error) {
+            console.error("Review submission error:", error);
+
+            message.textContent =
+                error.message ||
+                "Something went wrong. Please try again.";
+
+            message.className = "review-form-message error";
+
+        } finally {
+            button.disabled = false;
+            button.textContent = originalButtonText;
+        }
+    });
+}
+```

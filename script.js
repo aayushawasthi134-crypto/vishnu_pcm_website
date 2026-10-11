@@ -19,26 +19,21 @@ async function loadWebsiteData() {
 
         const data = await response.json();
 
-
         renderFaculty(
             data.faculty || []
         );
-
 
         renderToppers(
             data.toppers || []
         );
 
-
         renderAlumni(
             data.alumni || []
         );
 
-
         renderReviews(
             data.testimonials || []
         );
-
 
         initScrollReveal();
 
@@ -66,12 +61,6 @@ function getImageUrl(photo) {
         return "";
     }
 
-
-    /*
-       If Cloudinary or any full URL is already stored,
-       use it directly.
-    */
-
     if (
         photo.startsWith("http://") ||
         photo.startsWith("https://")
@@ -80,12 +69,6 @@ function getImageUrl(photo) {
         return photo;
 
     }
-
-
-    /*
-       For old local image paths such as:
-       /static/uploads/image.jpg
-    */
 
     return `${API_URL}${photo}`;
 
@@ -102,8 +85,8 @@ function initScrollReveal() {
         document.querySelectorAll(
             ".section-title, .course-card, " +
             ".faculty-card, .person-card, " +
-            ".review-card, .contact-container, " +
-            ".footer-grid"
+            ".review-card, .review-submit-card, " +
+            ".contact-container, .footer-grid"
         );
 
 
@@ -180,11 +163,9 @@ function initScrollReveal() {
                             return;
                         }
 
-
                         entry.target.classList.add(
                             "is-visible"
                         );
-
 
                         observer.unobserve(
                             entry.target
@@ -216,9 +197,7 @@ function initScrollReveal() {
    FACULTY
 ===================================== */
 
-function renderFaculty(
-    faculty
-) {
+function renderFaculty(faculty) {
 
     const container =
         document.getElementById(
@@ -256,14 +235,10 @@ function renderFaculty(
 
 
     container.innerHTML =
-
         faculty.map(
-
             teacher => `
 
-            <article
-                class="faculty-card"
-            >
+            <article class="faculty-card">
 
                 <div class="faculty-photo">
 
@@ -275,11 +250,13 @@ function renderFaculty(
                         `
 
                         <img
-                            src="${getImageUrl(
-                                teacher.photo
+                            src="${escapeAttribute(
+                                getImageUrl(
+                                    teacher.photo
+                                )
                             )}"
-                            alt="${escapeHTML(
-                                teacher.name
+                            alt="${escapeAttribute(
+                                teacher.name || ""
                             )}"
                         >
 
@@ -302,31 +279,24 @@ function renderFaculty(
                 <div class="faculty-info">
 
                     <span class="faculty-subject">
-
                         ${escapeHTML(
                             teacher.subject || ""
                         )}
-
                     </span>
 
 
                     <h3>
-
                         ${escapeHTML(
                             teacher.name || ""
                         )}
-
                     </h3>
 
 
                     <p>
-
                         ${escapeHTML(
                             teacher.description ||
-
                             "Dedicated to helping students understand concepts and improve their academic performance."
                         )}
-
                     </p>
 
                 </div>
@@ -334,7 +304,6 @@ function renderFaculty(
             </article>
 
         `
-
         ).join("");
 
 }
@@ -344,9 +313,7 @@ function renderFaculty(
    TOPPERS
 ===================================== */
 
-function renderToppers(
-    toppers
-) {
+function renderToppers(toppers) {
 
     const container =
         document.getElementById(
@@ -371,11 +338,9 @@ function renderToppers(
                         ACHIEVERS
                     </div>
 
-
                     <h3>
                         Toppers Coming Soon
                     </h3>
-
 
                     <p>
                         New achievers will
@@ -394,14 +359,10 @@ function renderToppers(
 
 
     container.innerHTML =
-
         toppers.map(
-
             topper => `
 
-            <article
-                class="person-card"
-            >
+            <article class="person-card">
 
                 ${
                     topper.photo
@@ -411,11 +372,13 @@ function renderToppers(
                     `
 
                     <img
-                        src="${getImageUrl(
-                            topper.photo
+                        src="${escapeAttribute(
+                            getImageUrl(
+                                topper.photo
+                            )
                         )}"
-                        alt="${escapeHTML(
-                            topper.name
+                        alt="${escapeAttribute(
+                            topper.name || ""
                         )}"
                     >
 
@@ -435,20 +398,16 @@ function renderToppers(
 
 
                     <h3>
-
                         ${escapeHTML(
                             topper.name || ""
                         )}
-
                     </h3>
 
 
                     <p>
-
                         ${escapeHTML(
                             topper.details || ""
                         )}
-
                     </p>
 
 
@@ -460,11 +419,9 @@ function renderToppers(
                         `
 
                         <p>
-
                             “${escapeHTML(
                                 topper.review
                             )}”
-
                         </p>
 
                         `
@@ -479,7 +436,6 @@ function renderToppers(
             </article>
 
         `
-
         ).join("");
 
 }
@@ -489,9 +445,7 @@ function renderToppers(
    ALUMNI
 ===================================== */
 
-function renderAlumni(
-    alumni
-) {
+function renderAlumni(alumni) {
 
     const container =
         document.getElementById(
@@ -516,11 +470,9 @@ function renderAlumni(
                         ALUMNI
                     </div>
 
-
                     <h3>
                         Alumni Coming Soon
                     </h3>
-
 
                     <p>
                         Alumni profiles will
@@ -539,14 +491,10 @@ function renderAlumni(
 
 
     container.innerHTML =
-
         alumni.map(
-
             person => `
 
-            <article
-                class="person-card"
-            >
+            <article class="person-card">
 
                 ${
                     person.photo
@@ -556,11 +504,13 @@ function renderAlumni(
                     `
 
                     <img
-                        src="${getImageUrl(
-                            person.photo
+                        src="${escapeAttribute(
+                            getImageUrl(
+                                person.photo
+                            )
                         )}"
-                        alt="${escapeHTML(
-                            person.name
+                        alt="${escapeAttribute(
+                            person.name || ""
                         )}"
                     >
 
@@ -580,20 +530,16 @@ function renderAlumni(
 
 
                     <h3>
-
                         ${escapeHTML(
                             person.name || ""
                         )}
-
                     </h3>
 
 
                     <p>
-
                         ${escapeHTML(
                             person.details || ""
                         )}
-
                     </p>
 
 
@@ -605,11 +551,9 @@ function renderAlumni(
                         `
 
                         <p>
-
                             “${escapeHTML(
                                 person.review
                             )}”
-
                         </p>
 
                         `
@@ -624,19 +568,16 @@ function renderAlumni(
             </article>
 
         `
-
         ).join("");
 
 }
 
 
 /* =====================================
-   REVIEWS
+   APPROVED REVIEWS
 ===================================== */
 
-function renderReviews(
-    reviews
-) {
+function renderReviews(reviews) {
 
     const container =
         document.getElementById(
@@ -653,14 +594,11 @@ function renderReviews(
 
         container.innerHTML = `
 
-            <article
-                class="review-card"
-            >
+            <article class="review-card">
 
                 <div class="stars">
                     ★★★★★
                 </div>
-
 
                 <p>
                     Student and parent
@@ -677,14 +615,10 @@ function renderReviews(
 
 
     container.innerHTML =
-
         reviews.map(
-
             review => `
 
-            <article
-                class="review-card"
-            >
+            <article class="review-card">
 
                 <div class="stars">
                     ★★★★★
@@ -692,27 +626,170 @@ function renderReviews(
 
 
                 <p>
-
                     “${escapeHTML(
                         review.review || ""
                     )}”
-
                 </p>
 
 
                 <strong>
-
                     ${escapeHTML(
                         review.name || ""
                     )}
-
                 </strong>
 
             </article>
 
         `
-
         ).join("");
+
+}
+
+
+/* =====================================
+   PUBLIC REVIEW SUBMISSION
+===================================== */
+
+const reviewForm =
+    document.getElementById(
+        "reviewForm"
+    );
+
+
+if (reviewForm) {
+
+    reviewForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "reviewName"
+                ).value.trim();
+
+
+            const review =
+                document.getElementById(
+                    "reviewText"
+                ).value.trim();
+
+
+            const button =
+                document.getElementById(
+                    "reviewSubmitBtn"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "reviewMessage"
+                );
+
+
+            if (!name || !review) {
+
+                message.textContent =
+                    "Please enter your name and review.";
+
+                message.className =
+                    "review-form-message error";
+
+                return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Submitting...";
+
+
+            message.textContent = "";
+
+
+            try {
+
+                const formData =
+                    new FormData();
+
+                formData.append(
+                    "name",
+                    name
+                );
+
+                formData.append(
+                    "review",
+                    review
+                );
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/reviews`,
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.detail ||
+                        "Unable to submit review."
+                    );
+
+                }
+
+
+                message.textContent =
+                    "Thank you! Your review has been submitted and is waiting for admin approval.";
+
+                message.className =
+                    "review-form-message success";
+
+
+                reviewForm.reset();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Review submission error:",
+                    error
+                );
+
+
+                message.textContent =
+                    error.message ||
+                    "Something went wrong. Please try again.";
+
+                message.className =
+                    "review-form-message error";
+
+            }
+
+            finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Submit Review →";
+
+            }
+
+        }
+    );
 
 }
 
@@ -731,7 +808,7 @@ if (queryForm) {
 
     queryForm.addEventListener(
         "submit",
-        function(event) {
+        function (event) {
 
             event.preventDefault();
 
@@ -783,13 +860,9 @@ Thank you.`;
 
 
             const whatsappURL =
-
                 "https://wa.me/" +
-
                 whatsappNumber +
-
                 "?text=" +
-
                 encodeURIComponent(
                     whatsappMessage
                 );
@@ -810,9 +883,7 @@ Thank you.`;
    SECURITY
 ===================================== */
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
     return String(value)
 
@@ -822,17 +893,32 @@ function escapeHTML(
             character => ({
 
                 "&": "&amp;",
-
                 "<": "&lt;",
-
                 ">": "&gt;",
-
                 '"': "&quot;",
-
                 "'": "&#039;"
 
             }[character])
 
+        );
+
+}
+
+
+function escapeAttribute(value) {
+
+    return String(value)
+        .replace(
+            /[&<>"']/g,
+            character => ({
+
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+
+            }[character])
         );
 
 }
