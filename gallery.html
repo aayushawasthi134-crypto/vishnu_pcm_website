@@ -188,10 +188,41 @@
 
     </footer>
 
-    <!-- EXTERNAL JAVASCRIPT -->
+    <!-- MOBILE MENU -->
+    <script>
 
-    <script src="pages.js"></script>
+        const menuToggle = document.getElementById("menuToggle");
+        const mainNav = document.getElementById("mainNav");
 
+        const setMenuState = (isOpen) => {
+            mainNav.classList.toggle("open", isOpen);
+            mainNav.classList.toggle("active", isOpen);
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        };
+
+        menuToggle.onclick = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setMenuState(!mainNav.classList.contains("open"));
+        };
+
+        document.addEventListener("click", (event) => {
+            if (event.target && !event.target.closest("#mainNav") && !event.target.closest("#menuToggle")) {
+                setMenuState(false);
+            }
+        });
+
+        mainNav.querySelectorAll("a").forEach(link => {
+
+            link.onclick = () => {
+                setMenuState(false);
+            };
+
+        });
+
+    </script>
+<script src="pages.js"></script>
 </body>
 
 </html>
