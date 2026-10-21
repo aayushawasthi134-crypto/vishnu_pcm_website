@@ -2695,3 +2695,67 @@ textarea {
         width: 100%;
     }
 }
+
+/* =========================================
+   WEBSITE PERFORMANCE AND VISIBILITY FIX
+========================================= */
+
+/* Prevent content from remaining invisible */
+.reveal-on-scroll:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+}
+
+/* Improve image rendering */
+img {
+    max-width: 100%;
+}
+
+/* Faculty, topper and alumni images */
+.faculty-card img,
+.person-card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Prevent image layout shifts */
+.faculty-card img {
+    aspect-ratio: 1 / 1;
+}
+
+.person-card img {
+    aspect-ratio: 1 / 1;
+}
+
+/* Avoid unnecessary animation on small screens */
+@media (max-width: 768px) {
+    .reveal-on-scroll {
+        transition-duration: 0.25s;
+    }
+
+    .course-card,
+    .faculty-card,
+    .person-card,
+    .review-card {
+        transition-duration: 0.25s;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

@@ -109,13 +109,13 @@ function initScrollReveal() {
                     "section-title"
                 ) ||
 
-                element.classList.contains(
-                    "contact-container"
-                ) ||
+                    element.classList.contains(
+                        "contact-container"
+                    ) ||
 
-                element.classList.contains(
-                    "footer-grid"
-                )
+                    element.classList.contains(
+                        "footer-grid"
+                    )
 
                     ? "fade-in"
 
@@ -242,36 +242,33 @@ function renderFaculty(faculty) {
 
                 <div class="faculty-photo">
 
-                    ${
-                        teacher.photo
+                    ${teacher.photo
 
-                        ?
+                    ?
 
-                        `
+                    `
 
                         <img
-                            src="${escapeAttribute(
-                                getImageUrl(
-                                    teacher.photo
-                                )
-                            )}"
-                            alt="${escapeAttribute(
-                                teacher.name || ""
-                            )}"
-                        >
+  src="${escapeAttribute(getImageUrl(teacher.photo))}"
+  alt="${escapeAttribute(teacher.name || "Faculty photo")}"
+  loading="lazy"
+  decoding="async"
+  width="300"
+  height="300"
+>
 
                         `
 
-                        :
+                    :
 
-                        `
+                    `
 
                         <div class="faculty-placeholder">
                             👨‍🏫
                         </div>
 
                         `
-                    }
+                }
 
                 </div>
 
@@ -280,23 +277,23 @@ function renderFaculty(faculty) {
 
                     <span class="faculty-subject">
                         ${escapeHTML(
-                            teacher.subject || ""
-                        )}
+                    teacher.subject || ""
+                )}
                     </span>
 
 
                     <h3>
                         ${escapeHTML(
-                            teacher.name || ""
-                        )}
+                    teacher.name || ""
+                )}
                     </h3>
 
 
                     <p>
                         ${escapeHTML(
-                            teacher.description ||
-                            "Dedicated to helping students understand concepts and improve their academic performance."
-                        )}
+                    teacher.description ||
+                    "Dedicated to helping students understand concepts and improve their academic performance."
+                )}
                     </p>
 
                 </div>
@@ -364,8 +361,7 @@ function renderToppers(toppers) {
 
             <article class="person-card">
 
-                ${
-                    topper.photo
+                ${topper.photo
 
                     ?
 
@@ -373,13 +369,13 @@ function renderToppers(toppers) {
 
                     <img
                         src="${escapeAttribute(
-                            getImageUrl(
-                                topper.photo
-                            )
-                        )}"
+                        getImageUrl(
+                            topper.photo
+                        )
+                    )}"
                         alt="${escapeAttribute(
-                            topper.name || ""
-                        )}"
+                        topper.name || ""
+                    )}"
                     >
 
                     `
@@ -399,37 +395,36 @@ function renderToppers(toppers) {
 
                     <h3>
                         ${escapeHTML(
-                            topper.name || ""
-                        )}
+                    topper.name || ""
+                )}
                     </h3>
 
 
                     <p>
                         ${escapeHTML(
-                            topper.details || ""
-                        )}
+                    topper.details || ""
+                )}
                     </p>
 
 
-                    ${
-                        topper.review
+                    ${topper.review
 
-                        ?
+                    ?
 
-                        `
+                    `
 
                         <p>
                             “${escapeHTML(
-                                topper.review
-                            )}”
+                        topper.review
+                    )}”
                         </p>
 
                         `
 
-                        :
+                    :
 
-                        ""
-                    }
+                    ""
+                }
 
                 </div>
 
@@ -496,8 +491,7 @@ function renderAlumni(alumni) {
 
             <article class="person-card">
 
-                ${
-                    person.photo
+                ${person.photo
 
                     ?
 
@@ -505,13 +499,13 @@ function renderAlumni(alumni) {
 
                     <img
                         src="${escapeAttribute(
-                            getImageUrl(
-                                person.photo
-                            )
-                        )}"
+                        getImageUrl(
+                            person.photo
+                        )
+                    )}"
                         alt="${escapeAttribute(
-                            person.name || ""
-                        )}"
+                        person.name || ""
+                    )}"
                     >
 
                     `
@@ -531,37 +525,36 @@ function renderAlumni(alumni) {
 
                     <h3>
                         ${escapeHTML(
-                            person.name || ""
-                        )}
+                    person.name || ""
+                )}
                     </h3>
 
 
                     <p>
                         ${escapeHTML(
-                            person.details || ""
-                        )}
+                    person.details || ""
+                )}
                     </p>
 
 
-                    ${
-                        person.review
+                    ${person.review
 
-                        ?
+                    ?
 
-                        `
+                    `
 
                         <p>
                             “${escapeHTML(
-                                person.review
-                            )}”
+                        person.review
+                    )}”
                         </p>
 
                         `
 
-                        :
+                    :
 
-                        ""
-                    }
+                    ""
+                }
 
                 </div>
 
@@ -627,15 +620,15 @@ function renderReviews(reviews) {
 
                 <p>
                     “${escapeHTML(
-                        review.review || ""
-                    )}”
+                review.review || ""
+            )}”
                 </p>
 
 
                 <strong>
                     ${escapeHTML(
-                        review.name || ""
-                    )}
+                review.name || ""
+            )}
                 </strong>
 
             </article>
@@ -843,7 +836,7 @@ if (queryForm) {
 
             const whatsappMessage =
 
-`Hello Vishnu PCM Classes,
+                `Hello Vishnu PCM Classes,
 
 I have a query regarding your coaching classes.
 
