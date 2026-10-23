@@ -4,32 +4,33 @@ document.addEventListener("DOMContentLoaded", function () {
        MOBILE HAMBURGER MENU
     ========================= */
 
-    const menuBtn = document.querySelector(".menu-btn");
+    const menuBtn = document.querySelector(".menu-btn, .menu-toggle");
     const mainNav = document.getElementById("mainNav");
+    const siteHeader = menuBtn && menuBtn.closest("header");
 
-    if (menuBtn && mainNav) {
+    if (menuBtn && mainNav && siteHeader) {
 
         const setMenuState = function (isOpen) {
             mainNav.classList.toggle("active", isOpen);
             mainNav.classList.toggle("open", isOpen);
+            siteHeader.classList.toggle("mobile-open", isOpen);
             menuBtn.setAttribute("aria-expanded", String(isOpen));
             menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
         };
+
+        setMenuState(false);
 
         menuBtn.onclick = function (e) {
 
             e.preventDefault();
             e.stopPropagation();
 
-            setMenuState(!mainNav.classList.contains("active"));
+            setMenuState(!mainNav.classList.contains("open"));
 
         };
 
         document.addEventListener("click", function (event) {
-            const clickedInsideHeader = event.target && menuBtn.contains(event.target);
-            const clickedInsideNav = event.target && mainNav.contains(event.target);
-
-            if (!clickedInsideHeader && !clickedInsideNav) {
+            if (event.target && !siteHeader.contains(event.target)) {
                 setMenuState(false);
             }
         });

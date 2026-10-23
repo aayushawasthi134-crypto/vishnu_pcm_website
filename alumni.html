@@ -143,7 +143,7 @@
         };
 
         document.addEventListener("click", (event) => {
-            if (event.target && !event.target.closest("#mainNav") && !event.target.closest("#menuToggle")) {
+            if (event.target && !event.target.closest("header")) {
                 setMenuState(false);
             }
         });

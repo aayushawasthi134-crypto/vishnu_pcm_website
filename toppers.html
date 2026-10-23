@@ -65,9 +65,11 @@
 
         .menu-toggle {
             display: none;
-            background: none;
-            border: none;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
             font-size: 28px;
+            padding: 5px 10px;
             cursor: pointer;
             color: inherit;
         }
@@ -168,17 +170,27 @@
             #mainNav {
                 display: none;
                 position: absolute;
-                top: 70px;
+                top: 100%;
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                padding: 20px;
-                background: #111;
-                z-index: 1000;
+                align-items: stretch;
+                gap: 0;
+                padding: 8px 5%;
+                background: #651515;
+                z-index: 10000;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             }
 
-            #mainNav.show {
+            #mainNav.open,
+            #mainNav.active {
                 display: flex;
+            }
+
+            #mainNav a {
+                width: 100%;
+                padding: 13px 5px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             }
 
             .page-section {
@@ -202,7 +214,7 @@
 <body>
 
 
-<header>
+<header class="site-header">
 
     <div class="logo">
 
@@ -214,9 +226,11 @@
 
 
     <button
-        class="menu-toggle"
+        class="menu-btn menu-toggle"
         id="menuToggle"
+        type="button"
         aria-label="Open menu"
+        aria-expanded="false"
     >
         ☰
     </button>
@@ -434,39 +448,9 @@ async function loadToppers() {
 
 loadToppers();
 
-
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const mainNav =
-    document.getElementById("mainNav");
-
-
-menuToggle.addEventListener(
-    "click",
-    () => {
-
-        mainNav.classList.toggle("show");
-
-    }
-);
-
-
-mainNav.querySelectorAll("a").forEach(link => {
-
-    link.addEventListener(
-        "click",
-        () => {
-
-            mainNav.classList.remove("show");
-
-        }
-    );
-
-});
-
 </script>
 
+<script src="pages.js"></script>
 
 </body>
 </html>

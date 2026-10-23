@@ -1415,7 +1415,7 @@ form {
     .gallery-card img {
         height: 200px;
     }
-}@media (max-width: 700px) {
+}@media (max-width: 900px) {
 
     .site-header {
         position: relative;
@@ -1441,6 +1441,7 @@ form {
         z-index: 10000;
     }
 
+    #mainNav.open,
     #mainNav.active {
         display: flex !important;
     }
