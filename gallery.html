@@ -206,6 +206,51 @@
             max-width: 95vw;
             max-height: 90vh;
             object-fit: contain;
+            touch-action: pan-y;
+        }
+
+        .viewer-navigation {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, .6);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .16);
+            color: white;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .viewer-navigation:hover {
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .viewer-navigation:disabled {
+            opacity: .35;
+            cursor: default;
+        }
+
+        .viewer-previous {
+            left: 22px;
+        }
+
+        .viewer-next {
+            right: 22px;
+        }
+
+        .viewer-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            background: rgba(0, 0, 0, .5);
+            padding: 7px 12px;
+            border-radius: 20px;
         }
 
         .close-viewer {
@@ -214,6 +259,21 @@
             right: 25px;
             background: white;
             color: #651515;
+        }
+
+        @media (max-width: 600px) {
+            .viewer-previous {
+                left: 10px;
+            }
+
+            .viewer-next {
+                right: 10px;
+            }
+
+            .viewer-navigation {
+                width: 42px;
+                height: 42px;
+            }
         }
 
         @media (max-width: 900px) {
@@ -354,7 +414,23 @@
             aria-label="Close image"
         >×</button>
 
+        <button
+            class="viewer-navigation viewer-previous"
+            id="previousImage"
+            type="button"
+            aria-label="Previous photo"
+        >‹</button>
+
         <img id="viewerImage" src="" alt="Gallery image">
+
+        <button
+            class="viewer-navigation viewer-next"
+            id="nextImage"
+            type="button"
+            aria-label="Next photo"
+        >›</button>
+
+        <div class="viewer-counter" id="viewerCounter" aria-live="polite"></div>
 
     </div>
 
@@ -388,8 +464,14 @@
         const modalDescription = document.getElementById("modalDescription");
         const imageViewer = document.getElementById("imageViewer");
         const viewerImage = document.getElementById("viewerImage");
+        const previousImageButton = document.getElementById("previousImage");
+        const nextImageButton = document.getElementById("nextImage");
+        const viewerCounter = document.getElementById("viewerCounter");
 
         let galleryEvents = [];
+        let activeGalleryEvent = null;
+        let activePhotoIndex = 0;
+        let touchStartX = null;
 
         function escapeHTML(value) {
             return String(value ?? "")
@@ -530,6 +612,7 @@
             const event = galleryEvents[index];
             if (!event) return;
 
+            activeGalleryEvent = event;
             modalTitle.textContent = event.title || "Event";
             modalDescription.textContent = event.description || "";
 
@@ -575,12 +658,35 @@
             document.body.style.overflow = "";
         }
 
-        function openImageViewer(imageUrl) {
-            if (!imageUrl) return;
+        function openImageViewer(photoIndex) {
+            const photos = activeGalleryEvent?.photos;
+            if (!Array.isArray(photos) || !photos[photoIndex]?.photo_url) return;
 
-            viewerImage.src = imageUrl;
+            activePhotoIndex = photoIndex;
+            updateImageViewer();
             imageViewer.classList.add("open");
             imageViewer.setAttribute("aria-hidden", "false");
+        }
+
+        function updateImageViewer() {
+            const photos = activeGalleryEvent?.photos || [];
+            const photo = photos[activePhotoIndex];
+            if (!photo?.photo_url) return;
+
+            viewerImage.src = optimizeCloudinaryUrl(photo.photo_url, 1600);
+            viewerImage.alt = `${activeGalleryEvent.title || "Gallery photo"} (${activePhotoIndex + 1} of ${photos.length})`;
+            viewerCounter.textContent = `${activePhotoIndex + 1} / ${photos.length}`;
+            previousImageButton.disabled = activePhotoIndex === 0;
+            nextImageButton.disabled = activePhotoIndex === photos.length - 1;
+        }
+
+        function showAdjacentImage(direction) {
+            const photos = activeGalleryEvent?.photos || [];
+            const nextIndex = activePhotoIndex + direction;
+            if (nextIndex < 0 || nextIndex >= photos.length) return;
+
+            activePhotoIndex = nextIndex;
+            updateImageViewer();
         }
 
         function closeImageViewer() {
@@ -609,20 +715,7 @@
             const photoBox = event.target.closest("[data-photo-index]");
             if (!photoBox) return;
 
-            const eventIndex = galleryEvents.findIndex(
-                item => item.title === modalTitle.textContent
-            );
-
-            // Use the current modal's event to identify the selected photo.
-            const currentEvent = galleryEvents.find(
-                item => item.title === modalTitle.textContent
-            );
-
-            const photo = currentEvent?.photos?.[Number(photoBox.dataset.photoIndex)];
-
-            if (photo?.photo_url) {
-                openImageViewer(optimizeCloudinaryUrl(photo.photo_url, 1600));
-            }
+            openImageViewer(Number(photoBox.dataset.photoIndex));
         });
 
         galleryPhotoGrid.addEventListener("keydown", event => {
@@ -633,19 +726,13 @@
 
             event.preventDefault();
 
-            const currentEvent = galleryEvents.find(
-                item => item.title === modalTitle.textContent
-            );
-
-            const photo = currentEvent?.photos?.[Number(photoBox.dataset.photoIndex)];
-
-            if (photo?.photo_url) {
-                openImageViewer(optimizeCloudinaryUrl(photo.photo_url, 1600));
-            }
+            openImageViewer(Number(photoBox.dataset.photoIndex));
         });
 
         document.getElementById("closeGallery").addEventListener("click", closeGalleryModal);
         document.getElementById("closeViewer").addEventListener("click", closeImageViewer);
+        previousImageButton.addEventListener("click", () => showAdjacentImage(-1));
+        nextImageButton.addEventListener("click", () => showAdjacentImage(1));
 
         galleryModal.addEventListener("click", event => {
             if (event.target === galleryModal) closeGalleryModal();
@@ -655,7 +742,26 @@
             if (event.target === imageViewer) closeImageViewer();
         });
 
+        imageViewer.addEventListener("touchstart", event => {
+            touchStartX = event.changedTouches[0].clientX;
+        }, { passive: true });
+
+        imageViewer.addEventListener("touchend", event => {
+            if (touchStartX === null) return;
+
+            const swipeDistance = event.changedTouches[0].clientX - touchStartX;
+            touchStartX = null;
+
+            if (Math.abs(swipeDistance) < 50) return;
+            showAdjacentImage(swipeDistance < 0 ? 1 : -1);
+        }, { passive: true });
+
         document.addEventListener("keydown", event => {
+            if (imageViewer.classList.contains("open")) {
+                if (event.key === "ArrowRight") showAdjacentImage(1);
+                if (event.key === "ArrowLeft") showAdjacentImage(-1);
+            }
+
             if (event.key === "Escape") {
                 closeImageViewer();
                 closeGalleryModal();
