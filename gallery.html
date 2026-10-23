@@ -400,13 +400,33 @@
                 .replaceAll("'", "&#039;");
         }
 
-        // Optimize Cloudinary images without changing database URLs.
-        function optimizeCloudinaryUrl(url, width = 800) {
-            if (!url || !url.includes("/image/upload/")) {
-                return url || "";
+        function resolveGalleryImageUrl(url) {
+            const value = String(url ?? "").trim();
+
+            if (!value) {
+                return "";
             }
 
-            return url.replace(
+            if (/^https?:\/\//i.test(value)) {
+                return value;
+            }
+
+            if (value.startsWith("//")) {
+                return `https:${value}`;
+            }
+
+            return `${API_URL}${value.startsWith("/") ? "" : "/"}${value}`;
+        }
+
+        // Optimize Cloudinary images without changing database URLs.
+        function optimizeCloudinaryUrl(url, width = 800) {
+            const imageUrl = resolveGalleryImageUrl(url);
+
+            if (!imageUrl.includes("/image/upload/")) {
+                return imageUrl;
+            }
+
+            return imageUrl.replace(
                 "/image/upload/",
                 `/image/upload/f_auto,q_auto,w_${width}/`
             );
@@ -455,10 +475,11 @@
             }
 
             galleryEventsGrid.innerHTML = events.map((event, index) => {
-                const cover = event.cover_photo
+                const coverPhoto = event.cover_photo || event.photos?.[0]?.photo_url;
+                const cover = coverPhoto
                     ? `
                         <img
-                            src="${escapeHTML(optimizeCloudinaryUrl(event.cover_photo, 900))}"
+                            src="${escapeHTML(optimizeCloudinaryUrl(coverPhoto, 900))}"
                             alt="${escapeHTML(event.title)}"
                             loading="lazy"
                             decoding="async"
