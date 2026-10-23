@@ -196,6 +196,7 @@
             align-items: center;
             justify-content: center;
             padding: 25px;
+            touch-action: none;
         }
 
         .image-viewer.open {
@@ -471,7 +472,8 @@
         let galleryEvents = [];
         let activeGalleryEvent = null;
         let activePhotoIndex = 0;
-        let touchStartX = null;
+        let swipeStart = null;
+        let viewerSwipeHandled = false;
 
         function escapeHTML(value) {
             return String(value ?? "")
@@ -739,22 +741,42 @@
         });
 
         imageViewer.addEventListener("click", event => {
+            if (viewerSwipeHandled) {
+                viewerSwipeHandled = false;
+                return;
+            }
+
             if (event.target === imageViewer) closeImageViewer();
         });
 
-        imageViewer.addEventListener("touchstart", event => {
-            touchStartX = event.changedTouches[0].clientX;
-        }, { passive: true });
+        imageViewer.addEventListener("pointerdown", event => {
+            if (!event.isPrimary) return;
 
-        imageViewer.addEventListener("touchend", event => {
-            if (touchStartX === null) return;
+            swipeStart = {
+                x: event.clientX,
+                y: event.clientY,
+                pointerId: event.pointerId
+            };
+            viewerSwipeHandled = false;
+            imageViewer.setPointerCapture(event.pointerId);
+        });
 
-            const swipeDistance = event.changedTouches[0].clientX - touchStartX;
-            touchStartX = null;
+        imageViewer.addEventListener("pointerup", event => {
+            if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
 
-            if (Math.abs(swipeDistance) < 50) return;
-            showAdjacentImage(swipeDistance < 0 ? 1 : -1);
-        }, { passive: true });
+            const deltaX = event.clientX - swipeStart.x;
+            const deltaY = event.clientY - swipeStart.y;
+            swipeStart = null;
+
+            if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+            viewerSwipeHandled = true;
+            showAdjacentImage(deltaX < 0 ? 1 : -1);
+        });
+
+        imageViewer.addEventListener("pointercancel", () => {
+            swipeStart = null;
+        });
 
         document.addEventListener("keydown", event => {
             if (imageViewer.classList.contains("open")) {
@@ -767,40 +789,6 @@
                 closeGalleryModal();
             }
         });
-
-        // Mobile navigation menu.
-        const menuToggle = document.getElementById("menuToggle");
-        const mainNav = document.getElementById("mainNav");
-
-        if (menuToggle && mainNav) {
-            function setMenuState(isOpen) {
-                mainNav.classList.toggle("open", isOpen);
-                mainNav.classList.toggle("active", isOpen);
-                menuToggle.setAttribute("aria-expanded", String(isOpen));
-                menuToggle.setAttribute(
-                    "aria-label",
-                    isOpen ? "Close menu" : "Open menu"
-                );
-            }
-
-            menuToggle.addEventListener("click", event => {
-                event.preventDefault();
-                setMenuState(!mainNav.classList.contains("open"));
-            });
-
-            document.addEventListener("click", event => {
-                if (
-                    !event.target.closest("#mainNav") &&
-                    !event.target.closest("#menuToggle")
-                ) {
-                    setMenuState(false);
-                }
-            });
-
-            mainNav.querySelectorAll("a").forEach(link => {
-                link.addEventListener("click", () => setMenuState(false));
-            });
-        }
 
         loadGallery();
     </script>
