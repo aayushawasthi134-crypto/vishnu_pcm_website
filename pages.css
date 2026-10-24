@@ -1420,6 +1420,7 @@ form {
     .site-header {
         position: relative;
         z-index: 9999;
+        padding-right: 5%;
     }
 
     .menu-btn {
