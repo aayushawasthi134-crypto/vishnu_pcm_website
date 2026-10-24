@@ -20,6 +20,7 @@
     <meta name="keywords" content="Vishnu PCM Classes, coaching in Rajajipuram, 3rd to 12th classes, JEE coaching, NEET coaching, CA coaching, commerce coaching Lucknow">
     <meta name="author" content="Vishnu PCM Classes">
     <meta name="robots" content="index, follow">
+    <meta name="api-base-url" content="https://vishnu-pcm-admin.onrender.com">
 
     <link rel="canonical" href="https://vishnupcmwebsite.vercel.app/">
 
@@ -28,28 +29,59 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vishnupcmwebsite.vercel.app/">
     <meta property="og:site_name" content="Vishnu PCM Classes">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image" content="https://vishnupcmwebsite.vercel.app/images/og-vishnu-pcm.png">
+    <meta property="og:image:alt" content="Vishnu PCM Classes in Rajajipuram, Lucknow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vishnu PCM Classes | Coaching in Rajajipuram, Lucknow">
+    <meta name="twitter:description" content="Focused coaching for Classes 3rd to 12th, JEE, NEET and CA in Lucknow.">
+    <meta name="twitter:image" content="https://vishnupcmwebsite.vercel.app/images/og-vishnu-pcm.png">
+    <meta name="theme-color" content="#651515">
 
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Vishnu PCM Classes",
-        "url": "https://vishnupcmwebsite.vercel.app/",
-        "telephone": "+91 94514 70559",
-        "description": "Vishnu PCM Classes provides coaching from Class 3rd to 12th, along with JEE, NEET and CA preparation in Rajajipuram, Lucknow with focused academic guidance.",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Rajajipuram",
-            "addressRegion": "Uttar Pradesh",
-            "addressCountry": "IN"
-        },
-        "areaServed": {
-            "@type": "City",
-            "name": "Lucknow"
-        }
-    }
+    <script>
+        (function () {
+            const configuredUrl = window.VISHNU_CONFIG && window.VISHNU_CONFIG.siteUrl;
+            const currentUrl = window.location.protocol.startsWith("http")
+                ? window.location.origin
+                : "https://vishnupcmwebsite.vercel.app";
+            const siteUrl = (configuredUrl || currentUrl).replace(/\/+$/, "");
+            const canonicalUrl = `${siteUrl}/`;
+
+            document.querySelector('link[rel="canonical"]').href = canonicalUrl;
+            document.querySelector('meta[property="og:url"]').content = canonicalUrl;
+            document.querySelector('meta[property="og:image"]').content =
+                `${siteUrl}/images/og-vishnu-pcm.png`;
+            document.querySelector('meta[name="twitter:image"]').content =
+                `${siteUrl}/images/og-vishnu-pcm.png`;
+
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": ["EducationalOrganization", "LocalBusiness"],
+                name: "Vishnu PCM Classes",
+                url: canonicalUrl,
+                image: `${siteUrl}/images/og-vishnu-pcm.png`,
+                telephone: "+91 94514 70559",
+                description: "Coaching for Classes 3rd to 12th, JEE, NEET and CA in Rajajipuram, Lucknow, with focused academic guidance.",
+                address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Rajajipuram",
+                    addressRegion: "Uttar Pradesh",
+                    addressCountry: "IN"
+                },
+                areaServed: {
+                    "@type": "City",
+                    name: "Lucknow"
+                },
+                sameAs: ["https://wa.me/919451470559"]
+            };
+
+            const schemaElement = document.createElement("script");
+            schemaElement.type = "application/ld+json";
+            schemaElement.textContent = JSON.stringify(structuredData);
+            document.head.appendChild(schemaElement);
+        })();
     </script>
 </head>
 
@@ -82,6 +114,13 @@
     </nav>
 </header>
 
+<div class="mobile-cta-bar" aria-label="Contact Vishnu PCM Classes">
+    <a class="mobile-cta-call" href="tel:+919451470559">Call Now</a>
+    <a class="mobile-cta-whatsapp" href="https://wa.me/919451470559" target="_blank" rel="noopener noreferrer">
+        WhatsApp Chat
+    </a>
+</div>
+
 <div class="course-strip" aria-label="Course categories">
     <div class="course-strip-inner">
         <a href="contact.html" style="font-size:18px;">3rd to 12th</a>
@@ -96,7 +135,7 @@
         <p class="eyebrow">3RD TO 12TH • JEE • NEET • CA</p>
         <h1>VISHNU PCM CLASSES</h1>
 
-        <p class="hero-text" style="font-size:30px;">
+        <p class="hero-text">
             Vishnu PCM Classes provides coaching for students from Class
             3rd to 12th across all boards, with specialised support for JEE,
             NEET and CA aspirants through strong conceptual clarity,
@@ -114,6 +153,33 @@
             <span>Class 3rd – 12th</span>
             <strong>All Boards • JEE • NEET • CA</strong>
             <small>Concepts • Practice • Results</small>
+        </div>
+    </div>
+</section>
+
+<section class="why-choose-section" aria-labelledby="whyChooseHeading">
+    <div class="why-choose-inner">
+        <div class="why-choose-heading">
+            <p class="eyebrow">A BETTER WAY TO LEARN</p>
+            <h2 id="whyChooseHeading">Why Choose Vishnu PCM Classes?</h2>
+            <p>Focused teaching and consistent support to help every student make measurable progress.</p>
+        </div>
+        <div class="why-choose-grid">
+            <article class="why-choose-card">
+                <span aria-hidden="true">◎</span>
+                <h3>Small Batch Sizes</h3>
+                <p>More opportunities to ask questions and get individual attention.</p>
+            </article>
+            <article class="why-choose-card">
+                <span aria-hidden="true">✦</span>
+                <h3>Personal Mentoring</h3>
+                <p>Guidance tailored to each student's learning needs and goals.</p>
+            </article>
+            <article class="why-choose-card">
+                <span aria-hidden="true">✓</span>
+                <h3>Regular Tests</h3>
+                <p>Practice and feedback that help students track progress and prepare with confidence.</p>
+            </article>
         </div>
     </div>
 </section>
@@ -166,6 +232,9 @@
     <div class="section-title">
         <p>OUR ACHIEVERS</p>
         <h2>Meritorious Students</h2>
+        <p class="section-description">
+            Celebrating students' hard work with their results, ranks and milestones.
+        </p>
     </div>
     <div id="toppersGrid" class="people-grid"></div>
 </section>
@@ -302,8 +371,11 @@
                         <label for="queryName">Your Name</label>
                         <input
                             id="queryName"
+                            name="name"
                             type="text"
                             placeholder="Enter your name"
+                            maxlength="100"
+                            autocomplete="name"
                             required
                         >
                     </div>
@@ -312,8 +384,12 @@
                         <label for="queryPhone">Phone Number</label>
                         <input
                             id="queryPhone"
+                            name="phone"
                             type="tel"
                             placeholder="Enter phone number"
+                            inputmode="tel"
+                            autocomplete="tel"
+                            maxlength="30"
                             required
                         >
                     </div>
@@ -322,14 +398,19 @@
                 <label for="queryEmail">Email Address</label>
                 <input
                     id="queryEmail"
+                    name="email"
                     type="email"
                     placeholder="Enter email address"
+                    autocomplete="email"
+                    maxlength="254"
                 >
 
                 <label for="queryMessage">Your Query</label>
                 <textarea
                     id="queryMessage"
+                    name="message"
                     placeholder="Write your query..."
+                    maxlength="2000"
                     required
                 ></textarea>
 
@@ -338,8 +419,9 @@
                 </button>
 
                 <small class="form-note">
-                    Your query will open in WhatsApp.
+                    We’ll save your enquiry and open WhatsApp so you can send it directly.
                 </small>
+                <p id="queryFormMessage" class="query-form-message" aria-live="polite"></p>
             </form>
         </div>
 

@@ -1,5 +1,8 @@
 
-const API_URL = "https://vishnu-pcm-admin.onrender.com";
+const API_URL =
+    (window.VISHNU_CONFIG && window.VISHNU_CONFIG.apiBaseUrl) ||
+    document.querySelector('meta[name="api-base-url"]')?.content ||
+    "https://vishnu-pcm-admin.onrender.com";
 
 /* =====================================
    LOAD WEBSITE DATA
@@ -18,7 +21,11 @@ async function loadWebsiteData() {
         renderFaculty(data.faculty || []);
         renderToppers(data.toppers || []);
         renderAlumni(data.alumni || []);
-        renderReviews(data.testimonials || []);
+        renderReviews(
+            (data.testimonials || []).filter(
+                review => review.status === "approved"
+            )
+        );
 
         initScrollReveal();
     } catch (error) {
@@ -246,11 +253,22 @@ function renderToppers(toppers) {
             ${createImage(topper.photo, topper.name || "Topper photo")}
 
             <div class="person-info">
-                <div class="tag">TOPPER</div>
+                <div class="tag">STUDENT ACHIEVER</div>
 
                 <h3>${escapeHTML(topper.name || "")}</h3>
 
-                <p>${escapeHTML(topper.details || "")}</p>
+                ${
+                    topper.details
+                        ? `<div class="achievement-badges" aria-label="Student results and achievements">
+                            ${String(topper.details)
+                                .split(/\s*[|•;]\s*/)
+                                .map(detail => detail.trim())
+                                .filter(Boolean)
+                                .map(detail => `<span class="achievement-badge">${escapeHTML(detail)}</span>`)
+                                .join("")}
+                        </div>`
+                        : ""
+                }
 
                 ${
                     topper.review
@@ -330,6 +348,7 @@ function renderReviews(reviews) {
 
     container.innerHTML = reviews.map(review => `
         <article class="review-card">
+            <span class="review-approved-label">APPROVED STUDENT REVIEW</span>
             <div class="stars">★★★★★</div>
 
             <p>“${escapeHTML(review.review || "")}”</p>
@@ -417,15 +436,17 @@ if (reviewForm) {
 const queryForm = document.getElementById("queryForm");
 
 if (queryForm) {
-    queryForm.addEventListener("submit", function (event) {
+    queryForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const nameInput = document.getElementById("queryName");
         const phoneInput = document.getElementById("queryPhone");
         const emailInput = document.getElementById("queryEmail");
         const messageInput = document.getElementById("queryMessage");
+        const statusMessage = document.getElementById("queryFormMessage");
+        const submitButton = queryForm.querySelector('button[type="submit"]');
 
-        if (!nameInput || !phoneInput || !messageInput) {
+        if (!nameInput || !phoneInput || !messageInput || !statusMessage || !submitButton) {
             return;
         }
 
@@ -433,13 +454,21 @@ if (queryForm) {
         const phone = phoneInput.value.trim();
         const email = emailInput ? emailInput.value.trim() : "";
         const message = messageInput.value.trim();
+        const phoneDigits = phone.replace(/\D/g, "");
 
-        if (!name || !phone || !message) {
-            alert("Please fill in your name, phone number and query.");
+        statusMessage.textContent = "";
+        statusMessage.className = "query-form-message";
+
+        if (!queryForm.reportValidity()) {
             return;
         }
 
-        const whatsappNumber = "919451470559";
+        if (name.length < 2 || phoneDigits.length < 7 || phoneDigits.length > 15 || message.length < 5) {
+            statusMessage.textContent =
+                "Please enter a name of at least 2 characters, a valid phone number, and a query of at least 5 characters.";
+            statusMessage.classList.add("error");
+            return;
+        }
 
         const whatsappMessage = `Hello Vishnu PCM Classes,
 
@@ -455,12 +484,50 @@ ${message}
 Thank you.`;
 
         const whatsappURL =
-            "https://wa.me/" +
-            whatsappNumber +
-            "?text=" +
+            "https://wa.me/919451470559?text=" +
             encodeURIComponent(whatsappMessage);
 
-        window.open(whatsappURL, "_blank", "noopener,noreferrer");
+        const whatsappWindow = window.open("about:blank", "_blank");
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+
+        try {
+            const response = await fetch(`${API_URL}/api/enquiries`, {
+                method: "POST",
+                body: new FormData(queryForm)
+            });
+            const responseData = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(
+                    responseData.detail || "We couldn't save your enquiry. Please try again."
+                );
+            }
+
+            queryForm.reset();
+            statusMessage.textContent =
+                "Your enquiry is saved. WhatsApp is opening so you can send it to our team.";
+            statusMessage.classList.add("success");
+
+            if (whatsappWindow && !whatsappWindow.closed) {
+                whatsappWindow.opener = null;
+                whatsappWindow.location.href = whatsappURL;
+            } else {
+                window.location.assign(whatsappURL);
+            }
+        } catch (error) {
+            if (whatsappWindow && !whatsappWindow.closed) {
+                whatsappWindow.close();
+            }
+
+            console.error("Enquiry submission error:", error);
+            statusMessage.textContent =
+                error.message || "Unable to send your enquiry. Please try again.";
+            statusMessage.classList.add("error");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Send Query →";
+        }
     });
 }
 

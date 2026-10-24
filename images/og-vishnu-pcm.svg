@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Vishnu PCM Classes</title>
+  <desc id="description">School, JEE, NEET and CA coaching in Rajajipuram, Lucknow.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a0f0f"/>
+      <stop offset="1" stop-color="#a51f1f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7dc8c"/>
+      <stop offset="1" stop-color="#d7a83e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <circle cx="1080" cy="80" r="250" fill="none" stroke="#f7dc8c" stroke-opacity=".14" stroke-width="2"/>
+  <circle cx="1080" cy="80" r="190" fill="none" stroke="#f7dc8c" stroke-opacity=".12" stroke-width="2"/>
+  <circle cx="70" cy="590" r="230" fill="none" stroke="#f7dc8c" stroke-opacity=".12" stroke-width="2"/>
+  <rect x="76" y="74" width="94" height="94" rx="22" fill="url(#gold)"/>
+  <text x="123" y="140" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="800" fill="#651515">V</text>
+  <text x="76" y="260" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" letter-spacing="5" fill="#f7dc8c">LEARN • GROW • SUCCEED</text>
+  <text x="72" y="355" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" fill="#ffffff">VISHNU PCM CLASSES</text>
+  <text x="76" y="420" font-family="Arial, Helvetica, sans-serif" font-size="32" fill="#fff4e8">Classes 3rd to 12th  •  JEE  •  NEET  •  CA</text>
+  <rect x="76" y="480" width="540" height="3" rx="2" fill="url(#gold)"/>
+  <text x="76" y="536" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#ffffff">RAJAJIPURAM, LUCKNOW</text>
+</svg>
